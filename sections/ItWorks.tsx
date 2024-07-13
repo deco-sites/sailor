@@ -1,27 +1,45 @@
-import { useSection } from "deco/hooks/useSection.ts";
+import { useScript } from "deco/hooks/useScript.ts";
 
-export interface Props {
-  /**
-   * @format rich-text
-   * @description The description of name.
-   * @default It Works!
-   */
-  name?: string;
-  count?: number;
-}
+const onLoad = () => {
+  htmx.onLoad(function () {
+    const withHash = document.getElementById("withHash");
+    const withNoHash = document.getElementById("withNoHash");
 
-export default function Section({ name = "It Works!", count = 0 }: Props) {
+    const hash = window.location.hash;
+    if (hash) {
+      withNoHash?.classList.add("hidden");
+      withHash?.classList.remove("hidden");
+    } else {
+      withHash?.classList.add("hidden");
+      withNoHash?.classList.remove("hidden");
+    }
+  });
+};
+
+export default function Section() {
   return (
-    <div
-      id="it-works"
-      class="container py-10 flex flex-col h-screen w-full items-center justify-center gap-16"
-    >
-      <div
-        class="leading-10 text-6xl"
-        dangerouslySetInnerHTML={{
-          __html: name,
-        }}
+    <>
+      <script
+        type="module"
+        defer
+        dangerouslySetInnerHTML={{ __html: useScript(onLoad) }}
       />
-    </div>
+      <div class="container py-10 flex flex-col h-screen w-full items-center justify-center gap-16">
+        <div
+          class={"hidden"}
+          id="withNoHash"
+          hx-ext="ws"
+          ws-connect="/ws"
+          hx-target="#roomId"
+        >
+          <div>
+            <p>
+              http://localhost:8000/<span id="roomId"></span>
+            </p>
+          </div>
+        </div>
+
+
+    </>
   );
 }

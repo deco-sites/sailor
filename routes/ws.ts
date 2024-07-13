@@ -14,9 +14,18 @@ const rooms: Room[] = [];
 export const handler: Handlers = {
   GET(req) {
     const { socket, response } = Deno.upgradeWebSocket(req);
+    const socketId = req.headers.get("sec-websocket-key");
+
+    if (!socketId) {
+      //TODO: fix this
+      return response;
+    }
 
     socket.onopen = () => {
-      console.log("WebSocket connection opened");
+      const hasRoom = rooms.filter((room) => room.ownerId == socketId);
+      if (!hasRoom.length) {
+        createRoom();
+      }
     };
 
     socket.onmessage = (event) => {
@@ -46,17 +55,15 @@ export const handler: Handlers = {
 
     const createRoom = () => {
       const roomId = "69420"; // crypto.randomUUID();
-      const connectionId = crypto.randomUUID() as string;
 
+      console.log("createroom");
       rooms.push({
         id: roomId,
-        ownerId: connectionId,
+        ownerId: socketId,
         owner: socket,
       });
 
-      socket.send(
-        JSON.stringify({ type: "info", ownId: connectionId, roomId: roomId }),
-      );
+      socket.send(`<span id="roomId">#${roomId}</span>`);
     };
 
     const joinRoom = (message: { roomId: string }) => {
