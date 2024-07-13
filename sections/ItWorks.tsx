@@ -19,7 +19,7 @@ export default function Section() {
 
       <Chat />
 
-      <div class="container py-10 flex flex-col h-screen w-full items-center justify-center gap-16">
+      <div class="flex flex-col h-full w-full justify-center">
         <div
           hx-ext="ws"
           ws-connect="/ws"
@@ -36,7 +36,11 @@ export default function Section() {
             </p>
           </div>
 
-          <form id="form" ws-send hx-select="#chat2" hx-swap="innerHTML">
+          <form
+            id="form"
+            ws-send
+            class="flex absolute bottom-0 mb-8 left-1/2 -translate-y-1/2 gap-2"
+          >
             <input class="hidden" name="type" value="message" />
             <input class="bg-red-200" type="text" name="content" id="content" />
             <button
