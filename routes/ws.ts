@@ -8,7 +8,6 @@ type Room = {
   peer?: WebSocket;
   peerId?: string;
 };
-
 const rooms: Room[] = [];
 
 export const handler: Handlers = {
@@ -22,10 +21,7 @@ export const handler: Handlers = {
     }
 
     socket.onopen = () => {
-      const hasRoom = rooms.filter((room) => room.ownerId == socketId);
-      if (!hasRoom.length) {
-        createRoom();
-      }
+      console.log("newConnection");
     };
 
     socket.onmessage = (event) => {
@@ -55,30 +51,22 @@ export const handler: Handlers = {
 
     const createRoom = () => {
       const roomId = "69420"; // crypto.randomUUID();
-
-      console.log("createroom");
       rooms.push({
         id: roomId,
         ownerId: socketId,
         owner: socket,
       });
-
-      socket.send(`<span id="roomId">#${roomId}</span>`);
+      socket.send(`<span id="roomId">${roomId}</span>`);
     };
 
     const joinRoom = (message: { roomId: string }) => {
       const room = rooms.find((room) => room.id === message.roomId);
       if (room) {
         if (!room.peerId) {
-          const ownId = crypto.randomUUID();
-
           room.peer = socket;
-          room.peerId = ownId;
+          room.peerId = socketId;
           room.owner.send(
-            JSON.stringify({ type: "peerJoined", peerId: ownId }),
-          );
-          socket.send(
-            JSON.stringify({ type: "info", roomId: room.id, ownId }),
+            JSON.stringify({ type: "peerJoined" }),
           );
 
           return;
@@ -101,9 +89,11 @@ export const handler: Handlers = {
     };
 
     const sendMessage = (
-      message: { roomId: string; ownId: string; content: string },
+      message: { content: string },
     ) => {
-      const room = rooms.find((room) => room.id = message.roomId);
+      const room = rooms.find((room) =>
+        room.ownerId == socketId || room.peerId == socketId
+      );
 
       if (!room) {
         socket.send(
@@ -115,26 +105,46 @@ export const handler: Handlers = {
         return;
       }
 
-      if (!message.ownId) {
-        socket.send(
-          JSON.stringify({
-            type: "error",
-            description: "Invalid ownId",
-          }),
-        );
-        return;
-      }
-
-      if (room.ownerId === message.ownId) {
-        console.log("ownId", message.ownId);
+      if (room.ownerId === socketId) {
         room.peer?.send(
-          JSON.stringify({ type: "message", content: message.content }),
+          `
+          <div id="chat" hx-swap-oob="beforeend">
+            <li id="message" style="width: 100%;">
+              <p> ${message.content}</p>
+            </li>
+          </div>
+          `,
+        );
+
+        room.owner.send(
+          `
+          <div id="chat" hx-swap-oob="beforeend">
+            <li id="message" style="width: 100%;" >
+              <p style="width: 100%; display: flex; justify-content: flex-end;"> ${message.content}</p>
+            </li>
+          </div>
+          `,
         );
         return;
       }
 
+      room.peer?.send(
+        `
+        <div id="chat" hx-swap-oob="beforeend">
+          <li id="message" style="width: 100%;">
+            <p style="width: 100%; display: flex; justify-content: flex-end;"> ${message.content}</p>
+          </li>
+        </div>
+        `,
+      );
       room.owner.send(
-        JSON.stringify({ type: "message", content: message.content }),
+        `
+        <div id="chat" hx-swap-oob="beforeend">
+          <li id="message" style="width: 100%;">
+            <p> ${message.content}</p>
+          </li>
+        </div>
+        `,
       );
     };
 

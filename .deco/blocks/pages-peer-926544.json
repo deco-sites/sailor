@@ -1,7 +1,11 @@
 {
   "name": "peer",
   "path": "/receive",
-  "sections": [],
+  "sections": [
+    {
+      "__resolveType": "site/sections/Peer.tsx"
+    }
+  ],
   "seo": {
     "__resolveType": "website/sections/Seo/SeoV2.tsx"
   },
