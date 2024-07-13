@@ -4,6 +4,9 @@
   "sections": [
     {
       "__resolveType": "site/sections/Peer.tsx"
+    },
+    {
+      "__resolveType": "site/sections/Waves.tsx"
     }
   ],
   "seo": {

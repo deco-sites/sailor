@@ -1,5 +1,6 @@
 import { useScript } from "deco/hooks/useScript.ts";
 import { Chat } from "site/components/Chat.tsx";
+import MessageBox from "site/sections/MessageBox.tsx";
 
 const onLoad = () => {
   window.addEventListener("load", (event) => {
@@ -36,20 +37,8 @@ export default function Section() {
             </p>
           </div>
 
-          <form
-            id="form"
-            ws-send
-            class="flex absolute bottom-0 mb-8 left-1/2 -translate-y-1/2 gap-2"
-          >
-            <input class="hidden" name="type" value="message" />
-            <input class="bg-red-200" type="text" name="content" id="content" />
-            <button
-              type="submit"
-              id="join"
-            >
-              send
-            </button>
-          </form>
+          <MessageBox />
+
         </div>
       </div>
     </>

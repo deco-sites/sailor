@@ -58,5 +58,17 @@
     "path": "/receive",
     "blockType": "pages",
     "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/Preview%20%2Fsections%2FWaves.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Waves.tsx"
+  },
+  "/.deco/blocks/Preview%20%2Fsections%2FNewSection.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/NewSection.tsx"
+  },
+  "/.deco/blocks/Preview%20%2Fsections%2FMessageBox.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/MessageBox.tsx"
   }
 }
