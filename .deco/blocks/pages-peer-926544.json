@@ -10,6 +10,17 @@
     },
     {
       "__resolveType": "site/sections/Waves.tsx"
+    },
+    {
+      "__resolveType": "website/sections/Seo/SeoV2.tsx",
+      "title": "Sail",
+      "description": "Message other sailors",
+      "type": "website",
+      "themeColor": "#23326a",
+      "noIndexing": false,
+      "jsonLDs": [
+        {}
+      ]
     }
   ],
   "seo": {
