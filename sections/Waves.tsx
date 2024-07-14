@@ -10,7 +10,7 @@ const onLoad = () => {
   let shouldCalculatePeer = !!window.location.hash
   let shouldPeerSink = false
   let peerDeph = 0
-  let newPos = -100
+  let newPos = -240
 
   const showToast = (msmg: string, error?: boolean) => {
     const toast = document.createElement("div")
@@ -47,16 +47,16 @@ const onLoad = () => {
     let a: number
     if (w > 1030) {
       const rem = (w - 1032) / 2
-      linpx = rem + 64
+      linpx = rem + 200
       a = h / 300
     } else {
-      a = h / 720
-      linpx = 64
+      a = h / 700
+      linpx = 200
     }
 
     if (!shouldCalculatePeer) {
       if (!boatPeer) return [10, a]
-      boatPeer.style.left = `${-100}px`
+      boatPeer.style.left = `${-240}px`
       return [10, a]
     }
 
@@ -75,7 +75,7 @@ const onLoad = () => {
       rinpx = 1032 + rem - 128
       a = h / 300
     } else {
-      a = h / 720
+      a = h / 700
       rinpx = w - 128
     }
 
@@ -143,9 +143,9 @@ const onLoad = () => {
 
     if (w > 1030) {
       const rem = (w - 1032) / 2
-      max = rem + 64
+      max = rem + 200
     } else {
-      max = 64
+      max = 200
     }
 
     if (Number(boatPeer.style.left.slice(0, -2)) >= max) {
