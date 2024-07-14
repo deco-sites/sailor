@@ -18,6 +18,7 @@
     "title": "Sailor",
     "description": "A sailor wants to exchange messages with you !!",
     "themeColor": "#4c6e68",
+    "disableIndexing": "true",
     "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11642/5ed092d6-2f11-4e71-9995-fb0fb0d13366",
     "favicon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11642/7b88c0eb-876d-461c-953d-b315c4d58cd8"
   },
