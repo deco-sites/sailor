@@ -29,7 +29,7 @@ export const Chat = () => {
         >
           <ul
             id="chat"
-            class="w-full text-black"
+            class="w-full text-secondary"
             hx-swap="beforeend"
             hx-swap-oob="beforeend"
           ></ul>

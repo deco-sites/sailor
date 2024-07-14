@@ -45,11 +45,11 @@ export default function Section() {
             id="startText"
             class="flex flex-col justify-center items-center absolute top-0 mt-10 left-0 right-0 mx-auto text-slate-200 gap-3 z-20"
           >
-            <h1 class="text-sm text-primary">YOU ARE A LONE SAILOR...</h1>
-            <h2 class="text-2xl text-primary">
+            <h1 class="text-2xl text-secondary">YOU ARE A LONE SAILOR...</h1>
+            <h2 class="text-4xl text-secondary">
               INVITE SOMEONE TO SAIL WITH YOU?
             </h2>
-            <div class="flex flex-row gap-1 text-xs text-primary">
+            <div class="flex flex-row gap-1 text-sm text-secondary">
               <p>send them this link:</p>
               <p class="cursor-pointer" id="link">
                 http://localhost:8000/receive#<span id="roomId"></span>
