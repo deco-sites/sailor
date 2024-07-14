@@ -2,15 +2,8 @@ import { useScript } from "deco/hooks/useScript.ts"
 import { Chat } from "site/components/Chat.tsx"
 import MessageBox from "site/sections/MessageBox.tsx"
 
-interface Props {
-  /**
-   * @description The description of name.
-   */
-  name?: string
-}
-
 const onLoad = () => {
-  htmx.onLoad(() => {
+  globalThis.addEventListener("DOMContentLoaded", () => {
     const hash = window.location.hash
     const roomId = document.getElementById("roomId") as HTMLInputElement
 
@@ -21,7 +14,7 @@ const onLoad = () => {
   })
 }
 
-export default function Section({ name = "Capy" }: Props) {
+export default function Section() {
   return (
     <>
       <script

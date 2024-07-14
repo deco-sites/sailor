@@ -6,6 +6,9 @@
       "__resolveType": "site/sections/Peer.tsx"
     },
     {
+      "__resolveType": "site/sections/starstuff/StarBG.tsx"
+    },
+    {
       "__resolveType": "site/sections/Waves.tsx"
     }
   ],

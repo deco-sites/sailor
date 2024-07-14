@@ -33,7 +33,7 @@ const onLoad = () => {
       linpx = rem + 64
       a = h / 300
     } else {
-      a = h / 700
+      a = h / 720
       linpx = 64
     }
 
@@ -54,7 +54,7 @@ const onLoad = () => {
       rinpx = 1032 + rem - 128
       a = h / 300
     } else {
-      a = h / 700
+      a = h / 720
       rinpx = w - 128
     }
 
@@ -92,7 +92,7 @@ export default function Section() {
         dangerouslySetInnerHTML={{ __html: useScript(onLoad) }}
       />
 
-      <div class="absolute flex flex-col bg-black absolute top-[50%] left-0 right-0 ">
+      <div class="absolute flex flex-col absolute top-[50%] left-0 right-0 ">
         <div class="flex flex-col h-full relative">
           <div class="w-full relative">
             <svg

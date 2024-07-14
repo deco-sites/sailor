@@ -3,7 +3,7 @@ import { Chat } from "site/components/Chat.tsx"
 import MessageBox from "site/sections/MessageBox.tsx"
 
 const onLoad = () => {
-  window.addEventListener("DOMContentLoaded", () => {
+  globalThis.addEventListener("DOMContentLoaded", () => {
     document.getElementById("create")?.click()
 
     document.getElementById("link")?.addEventListener("click", () => {
