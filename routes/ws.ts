@@ -56,7 +56,7 @@ export const handler: Handlers = {
         ownerId: socketId,
         owner: socket,
       });
-      socket.send(`<span id="roomId">${roomId}</span>`);
+      socket.send(`<span hx-swap="beforeend" id="roomId">${roomId}</span>`);
     };
 
     const joinRoom = (message: { roomId: string }) => {
