@@ -1,7 +1,11 @@
 export const Boat = ({ inverted }: { inverted?: boolean }) => {
   return (
     <div class="relative">
-      <span class="absolute mt-30 h-3 w-3 rounded-full animate-ping bg-accent opacity-75 blur-sm"></span>
+      <span
+        class={`absolute mt-[102px] ${
+          !inverted ? "ml-[141px]" : "ml-[47px]"
+        }   h-3 w-3 rounded-full animate-ping bg-accent opacity-75 blur-[1px] z-20`}
+      ></span>
       <svg
         width="200px"
         height="250px"
