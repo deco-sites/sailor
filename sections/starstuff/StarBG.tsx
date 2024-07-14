@@ -53,7 +53,6 @@ const onLoad = (numberOfStars: number) => {
   }
 
   function randomizeLocation(i: number) {
-    //console.log("I got here 3");
     const var1 = Math.round(Math.random() * (globalThis.innerWidth - 5)) + "px"
     const var2 =
       Math.round(Math.random() * (globalThis.innerHeight * 0.6 - 5)) + "px"
