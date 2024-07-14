@@ -96,22 +96,13 @@ export default function Section() {
         <div class="flex flex-col h-full relative">
           <div class="w-full relative">
             <svg
+              class="fill-primary"
               width="100%"
               viewBox="0 0 500 700"
               id="blobSvg"
               preserveAspectRatio="none"
             >
-              <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" style="stop-color: rgb(21, 93, 169)"></stop>
-                  <stop
-                    offset="15%"
-                    style="stop-color: rgb(11, 62, 117)"
-                  ></stop>
-                  <stop offset="100%" style="stop-color: rgb(4, 18, 43)"></stop>
-                </linearGradient>
-              </defs>
-              <path id="wave" fill="url(#gradient)">
+              <path id="wave">
                 <animate
                   attributeName="d"
                   dur="8000ms"

@@ -15,21 +15,21 @@ export default function Section() {
     <>
       <script dangerouslySetInnerHTML={{ __html: useScript(onLoad) }} />
       <form
-        class="flex absolute bottom-0 mb-8 left-0 right-0 mx-auto z-50 justify-center"
+        class="flex absolute bottom-0 mb-8 left-0 right-0 mx-auto z-50 justify-center "
         id="form"
         ws-send
       >
         <div class="flex gap-2 items-center">
           <input class="hidden" name="type" value="message" />
           <input
-            class="w-full p-2 rounded-md h-8 border-gray-200 sm:text-sm placeholder:text-sm"
+            class="w-full p-2 rounded-md h-8 border-gray-200 sm:text-sm placeholder:text-sm bg-base-100"
             type="text"
             name="content"
             id="content"
             placeholder={"type ..."}
           />
           <button
-            class="flex items-center p-2 w-8 h-8 rounded-md justify-center bg-white"
+            class="flex items-center p-2 w-8 h-8 rounded-md justify-center bg-base-100 "
             id="join"
           >
             <Icon name="send" />
