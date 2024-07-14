@@ -657,7 +657,8 @@
           "viewId": "Theme Selector",
           "id": "themes::Theme%20Selector::palette::Theme%20Selector::%7B%7D",
           "state": {
-            "__signal": null
+            "__signal": null,
+            "value": "error"
           }
         },
         "themes::Theme%20Viewer::palette::Theme%20Viewer::%7B%7D": {
@@ -1414,6 +1415,39 @@
           "render": "function",
           "viewId": "Environment",
           "id": "Publish::Environment::rocket-launch::Environment::%7B%7D",
+          "state": {
+            "__signal": null
+          }
+        }
+      }
+    },
+    {
+      "id": "/.deco/blocks/pages-peer-926544.json",
+      "name": "peer",
+      "pinned": false,
+      "icon": "file",
+      "layout": [],
+      "tabs": {
+        "%2F.deco%2Fblocks%2Fpages-peer-926544.json::Properties::list::Properties::%7B%7D": {
+          "name": "Properties",
+          "icon": "list",
+          "accepts": "function",
+          "render": "function",
+          "viewId": "Properties",
+          "width": 30,
+          "id": "%2F.deco%2Fblocks%2Fpages-peer-926544.json::Properties::list::Properties::%7B%7D",
+          "state": {
+            "__signal": null
+          }
+        },
+        "%2F.deco%2Fblocks%2Fpages-peer-926544.json::Preview::visibility::Preview::%7B%7D": {
+          "name": "Preview",
+          "icon": "visibility",
+          "accepts": "function",
+          "render": "function",
+          "viewId": "Preview",
+          "width": 70,
+          "id": "%2F.deco%2Fblocks%2Fpages-peer-926544.json::Preview::visibility::Preview::%7B%7D",
           "state": {
             "__signal": null
           }

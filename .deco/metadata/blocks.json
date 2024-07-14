@@ -70,5 +70,13 @@
   "/.deco/blocks/Preview%20%2Fsections%2FMessageBox.tsx.json": {
     "blockType": "sections",
     "__resolveType": "site/sections/MessageBox.tsx"
+  },
+  "/.deco/blocks/Default%20Night.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Theme/Theme.tsx"
+  },
+  "/.deco/blocks/Sun.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Theme/Theme.tsx"
   }
 }

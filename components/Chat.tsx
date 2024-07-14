@@ -22,14 +22,14 @@ export const Chat = () => {
         defer
         dangerouslySetInnerHTML={{ __html: useScript(onLoad) }}
       />
-      <div class="flex justify-center w-full flex-row w-full h-[50dvh] flex-col items-center absolute top-0 mt-10 left-0 right-0 mx-auto text-slate-200 gap-3 z-10">
+      <div class=" flex justify-center w-full flex-row w-full h-[50dvh] flex-col items-center absolute top-0 mt-10 left-0 right-0 mx-auto text-slate-200 gap-3 z-10">
         <div
           id="chatContainer"
-          class="flex w-full h-full flex-col-reverse p-4 max-w-[1032px] overflow-y-scroll text-sm mb-4"
+          class=" flex w-full h-full flex-col-reverse p-4 max-w-[1032px] overflow-y-scroll text-sm mb-4"
         >
           <ul
             id="chat"
-            class="w-full text-white"
+            class="w-full text-secondary"
             hx-swap="beforeend"
             hx-swap-oob="beforeend"
           ></ul>
