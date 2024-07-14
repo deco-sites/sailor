@@ -3,12 +3,11 @@
     "type": "website",
     "jsonLDs": [],
     "noIndexing": false,
-    "description": "Improve your page performance with deco.cx",
-    "titleTemplate": "%s | deco.cx",
-    "descriptionTemplate": "%s | deco.cx",
-    "title": "Start",
-    "favicon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/8/40cc7da0-93d3-4215-9c2a-04b2f86b0a47",
-    "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/8/22c99167-0018-484f-8b0d-4295a7d771f2"
+    "description": "Exchange messages with other sailors",
+    "title": "Sailor",
+    "favicon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11642/6edfa67e-4464-404f-a545-cf44b7af2cb5",
+    "themeColor": "#486b67",
+    "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11642/ce8d894d-e8d3-4ff9-9d4d-c094047ba13e"
   },
   "global": [
     {
@@ -21,7 +20,8 @@
     },
     {
       "__resolveType": "website/loaders/redirects.ts"
-    }
+    },
+    []
   ],
   "caching": {
     "directives": []
@@ -30,5 +30,14 @@
   "firstByteThresholdMS": true,
   "theme": {
     "__resolveType": "Sun"
+  },
+  "abTesting": {
+    "replaces": [],
+    "includeScriptsToHead": {
+      "includes": []
+    }
+  },
+  "flavor": {
+    "framework": "fresh"
   }
 }
