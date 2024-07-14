@@ -1,54 +1,54 @@
-import { useScript } from "deco/hooks/useScript.ts";
+import { useScript } from "deco/hooks/useScript.ts"
 
 interface Props {
   /**
    * @description The description of name.
    */
-  name?: string;
+  name?: string
 }
 
 const onLoad = () => {
-  let [h, w] = [window.innerHeight, window.innerWidth];
+  let [h, w] = [window.innerHeight, window.innerWidth]
 
-  const blobSvg = document.getElementById("blobSvg") as SVGElement | null;
-  const boat = document.getElementById("boat");
-  const wave = document.getElementById("wave");
+  const blobSvg = document.getElementById("blobSvg") as SVGElement | null
+  const boat = document.getElementById("boat")
+  const wave = document.getElementById("wave")
 
   const getPathAtPos = (path: SVGElement, pos: number) => {
-    const totalLength = path.getTotalLength();
-    const waveLength = totalLength * 0.2;
-    const point = path.getPointAtLength((waveLength * pos) / w);
-    return point;
-  };
+    const totalLength = path.getTotalLength()
+    const waveLength = totalLength * 0.2
+    const point = path.getPointAtLength((waveLength * pos) / w)
+    return point
+  }
 
   const animateBoat = () => {
-    let linpx;
+    let linpx
     if (w > 1030) {
-      let rem = (w - 1032) / 2;
-      linpx = rem + 44;
+      let rem = (w - 1032) / 2
+      linpx = rem + 44
     } else {
-      linpx = 44;
+      linpx = 44
     }
 
-    const point = getPathAtPos(wave, linpx);
-    let a = h / 300;
-    boat.style.left = `${linpx}px`;
-    boat.style.top = `${point.y * a}px`;
+    const point = getPathAtPos(wave, linpx)
+    let a = h / 300
+    boat.style.left = `${linpx}px`
+    boat.style.top = `${point.y * a}px`
 
-    requestAnimationFrame(animateBoat);
-  };
+    requestAnimationFrame(animateBoat)
+  }
 
   function waitForPathToLoad(callback) {
-    const blobPath = blobSvg.querySelector("#wave");
+    const blobPath = blobSvg.querySelector("#wave")
     if (blobPath && blobPath.getTotalLength() > 0) {
-      callback();
+      callback()
     } else {
-      requestAnimationFrame(() => waitForPathToLoad(callback));
+      requestAnimationFrame(() => waitForPathToLoad(callback))
     }
   }
 
-  waitForPathToLoad(animateBoat);
-};
+  waitForPathToLoad(animateBoat)
+}
 
 export default function Section({ name = "Capy" }: Props) {
   return (
@@ -72,8 +72,10 @@ export default function Section({ name = "Capy" }: Props) {
               <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" style="stop-color: rgb(21, 93, 169)"></stop>
-                  <stop offset="15%" style="stop-color: rgb(11, 62, 117)">
-                  </stop>
+                  <stop
+                    offset="15%"
+                    style="stop-color: rgb(11, 62, 117)"
+                  ></stop>
                   <stop offset="100%" style="stop-color: rgb(4, 18, 43)"></stop>
                 </linearGradient>
               </defs>
@@ -92,8 +94,7 @@ export default function Section({ name = "Capy" }: Props) {
                   M0.00,49.98 C405.47,10.38 254.79,113.98 500.00,49.98 L500.00,700 L0.00,700.00 Z;
                   M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,700.00 L0.00,700.00 Z;
                  "
-                >
-                </animate>
+                ></animate>
               </path>
             </svg>
             <svg id="boat" class="absolute w-14" viewBox="0 0 64 64">
@@ -106,5 +107,5 @@ export default function Section({ name = "Capy" }: Props) {
         </div>
       </div>
     </>
-  );
+  )
 }

@@ -1,10 +1,10 @@
-import Icon from "site/components/ui/Icon.tsx";
+import Icon from "site/components/ui/Icon.tsx"
 
 interface Props {
   /**
    * @description The description of name.
    */
-  name?: string;
+  name?: string
 }
 
 export default function Section() {
@@ -30,5 +30,5 @@ export default function Section() {
         </div>
       </form>
     </>
-  );
+  )
 }
