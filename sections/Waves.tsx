@@ -12,6 +12,27 @@ const onLoad = () => {
   let peerDeph = 0
   let newPos = -100
 
+  const showToast = (msmg: string, error?: boolean) => {
+    const toast = document.createElement("div")
+    toast.className = `absolute top-0 mt-10 z-20 left-0 right-0 mx-auto w-full  ${
+      error ? "bg-red-500 text-white" : "bg-base-100"
+    } shadow-xl p-2 max-w-48 rounded-md`
+    toast.id = "toast"
+
+    const txt = document.createElement("p")
+    txt.innerText = msmg
+    txt.className = "text-xs"
+    toast.appendChild(txt)
+
+    const apd = document.getElementById("apd")
+
+    apd?.appendChild(toast)
+
+    setTimeout(() => {
+      document.getElementById("toast")?.remove()
+    }, 2398)
+  }
+
   const getPathAtPos = (path: SVGPathElement, pos: number) => {
     const totalLength = path.getTotalLength()
     const waveLength = totalLength * 0.2
@@ -168,6 +189,7 @@ const onLoad = () => {
     if (!message) return
 
     if (message.type === "peerConnected") {
+      showToast("Peer connected")
       // trigger the boat animation
       requestAnimationFrame(animateBoatPeer)
       // animate boat untill it reaches the correct pos
@@ -175,13 +197,19 @@ const onLoad = () => {
     }
 
     if (message.type === "ownerDisconnected") {
+      showToast("Peer disconnected")
       shouldPeerSink = true
       requestAnimationFrame(animatePeerSink)
     }
 
     if (message.type === "peerDisconnected") {
+      showToast("Peer disconnected")
       shouldPeerSink = true
       requestAnimationFrame(animatePeerSink)
+    }
+
+    if (message.type === "error") {
+      showToast(message.description || "An error has ocurred", true)
     }
   })
 }
