@@ -17,7 +17,7 @@
     },
     {
       "__resolveType": "website/sections/Seo/SeoV2.tsx",
-      "noIndexing": true
+      "noIndexing": false
     }
   ],
   "__resolveType": "website/pages/Page.tsx",
@@ -27,7 +27,7 @@
     "title": "Sailor",
     "description": "Exchange messages with other sailors",
     "themeColor": "#4c6e68",
-    "noIndexing": "true",
+    "noIndexing": false,
     "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11642/edc6f832-558d-4f3c-acdc-540e50638933",
     "favicon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11642/2ce8f696-3909-4ae4-909c-f3486505bf07"
   }
