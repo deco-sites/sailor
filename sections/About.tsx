@@ -1,11 +1,15 @@
 export default function Section() {
   return (
-    <div class=" absolute bg-secondary w-screen pt-8 pb-18 z-50 flex-1 flex-col text-center gap-y-15 h-18">
-      <div class="text-6xl text-white"> A HAIKU</div>
-      <div>
-        <p class="text-white text-xl">Beneath the night sky,</p>
-        <p class="text-white text-xl">A sailor's call drifts afar,</p>
-        <p class="text-white text-xl">Stars guide his message.</p>
+    <div className="relative bg-secondary w-screen min-h-screen flex items-center justify-center py-24 px-4">
+      <div className="text-center">
+        <div className="text-6xl text-white pb-10">A HAIKU</div>
+        <div>
+          <p className="text-white text-xl pb-6">Beneath the night sky,</p>
+          <p className="text-white text-xl pb-6">
+            A sailor's call drifts afar,
+          </p>
+          <p className="text-white text-xl pb-6">Stars guide his message.</p>
+        </div>
       </div>
     </div>
   )

@@ -150,7 +150,7 @@ interface Props {
 
 export default function Section({ numberOfStars = 10 }: Props) {
   return (
-    <div id="starcontainer" class="bg-base-100">
+    <div id="starcontainer" class="bg-base-100 z-0">
       <header>
         <script
           dangerouslySetInnerHTML={{

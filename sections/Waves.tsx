@@ -116,7 +116,7 @@ export default function Section() {
         dangerouslySetInnerHTML={{ __html: useScript(onLoad) }}
       />
 
-      <div class="absolute flex flex-col absolute top-[50%] left-0 right-0 ">
+      <div class="absolute flex flex-col absolute top-[50%] left-0 right-0 max-h-[60%] overflow-hidden z-10">
         <div class="flex flex-col h-full relative">
           <div class="w-full relative">
             <svg
