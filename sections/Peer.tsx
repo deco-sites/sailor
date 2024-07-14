@@ -37,7 +37,7 @@ export default function Section({ name = "Capy" }: Props) {
         hx-ext="ws"
         ws-connect="/ws"
       >
-        <form class="hidden" hx-trigger="click" id="form" ws-send>
+        <form class="hidden" hx-trigger="click" id="form" ws-send >
           <input name="type" value="join" />
           <input id="roomId" name="roomId" value="69420" />
           <button id="join" type="submit"></button>

@@ -66,7 +66,11 @@ export const handler: Handlers = {
           room.peer = socket;
           room.peerId = socketId;
           room.owner.send(
-            JSON.stringify({ type: "peerJoined" }),
+            `
+              <div id="startText" hx-swap-oob="outerHTML">
+              <span class="hidden" id="roomId"></span>
+              </div>
+            `,
           );
 
           return;

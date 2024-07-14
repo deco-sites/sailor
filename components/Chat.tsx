@@ -25,11 +25,11 @@ export const Chat = () => {
             <div class="flex justify-center w-full flex-row w-full h-[50dvh]">
                 <div
                     id="chatContainer"
-                    class="flex w-full p-4 max-w-[1032px] bg-slate-200 overflow-y-scroll text-sm"
+                    class="flex w-full flex-col-reverse p-4 max-w-[1032px] overflow-y-scroll text-sm"
                 >
                     <ul
                         id="chat"
-                        class="w-full"
+                        class="w-full text-white"
                         hx-swap="beforeend"
                         hx-swap-oob="beforeend"
                     >

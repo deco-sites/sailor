@@ -26,7 +26,7 @@ export default defineApp(async (_req, ctx) => {
       </Head>
 
       {/* Rest of Preact tree */}
-      <main class="h-screen">
+      <main class="h-screen bg-[#020617]">
         <ctx.Component />
       </main>
     </>
