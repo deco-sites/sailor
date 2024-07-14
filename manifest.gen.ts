@@ -5,11 +5,13 @@
 import * as $$$$$$$$$$$0 from "./apps/deco/htmx.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 import * as $$$$$$0 from "./sections/ItWorks.tsx";
+import * as $$$$$$2 from "./sections/starstuff/StarBG.tsx";
 import * as $$$$$$1 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "sections": {
     "site/sections/ItWorks.tsx": $$$$$$0,
+    "site/sections/starstuff/StarBG.tsx": $$$$$$2,
     "site/sections/Theme/Theme.tsx": $$$$$$1,
   },
   "apps": {
