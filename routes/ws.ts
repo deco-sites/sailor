@@ -50,7 +50,7 @@ export const handler: Handlers = {
     };
 
     const createRoom = () => {
-      const roomId = "69420"; // crypto.randomUUID();
+      const roomId = crypto.randomUUID();
       rooms.push({
         id: roomId,
         ownerId: socketId,
