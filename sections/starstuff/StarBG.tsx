@@ -25,8 +25,7 @@ const onLoad = (numberOfStars: number) => {
     const starIndex = document.getElementsByClassName("sparkle1").length - 1
     randomizeLocation(starIndex)
     randomizeSize(starIndex)
-    restartAnimation(starIndex)
-    loopAnimation(starIndex)
+    startAnimation(starIndex)
   }
 
   function addStars(numofstars: number) {
@@ -80,6 +79,24 @@ const onLoad = (numberOfStars: number) => {
     }
   }
 
+  function startAnimation(i: number) {
+    const sparkleEl = document.getElementsByClassName("sparkle1")[
+      i
+    ] as HTMLElement
+
+    if (sparkleEl) {
+      sparkleEl.addEventListener("animationend", handleAnimationEnd)
+    }
+
+    function handleAnimationEnd() {
+      randomizeSize(i)
+      randomizeLocation(i)
+      restartAnimation(i)
+      sparkleEl.removeEventListener("animationend", handleAnimationEnd)
+      startAnimation(i)
+    }
+  }
+
   function restartAnimation(i: number) {
     const sparkleEl = document.getElementsByClassName("sparkle1")[
       i
@@ -97,20 +114,6 @@ const onLoad = (numberOfStars: number) => {
       blurEl.style.animation = ""
     } else {
       console.log("Element doesn't exist yet")
-    }
-  }
-
-  function loopAnimation(i: number) {
-    const sparkleEl = document.getElementsByClassName("sparkle1")[
-      i
-    ] as HTMLElement
-    if (sparkleEl) {
-      sparkleEl.addEventListener("animationend", () => {
-        randomizeSize(i)
-        randomizeLocation(i)
-        restartAnimation(i)
-        loopAnimation(i) // Continue the loop for this star
-      })
     }
   }
 
