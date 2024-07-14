@@ -50,7 +50,7 @@ export const handler: Handlers = {
     };
 
     const createRoom = () => {
-      const roomId = "69420"; // crypto.randomUUID();
+      const roomId = crypto.randomUUID();
       rooms.push({
         id: roomId,
         ownerId: socketId,
@@ -73,6 +73,10 @@ export const handler: Handlers = {
             `,
           );
 
+          room.owner.send(JSON.stringify({
+            type: "peerConnected",
+          }));
+
           return;
         }
 
@@ -86,7 +90,7 @@ export const handler: Handlers = {
         socket.send(
           JSON.stringify({
             type: "error",
-            description: "No room found for that id",
+            description: "No room found for this id",
           }),
         );
       }
