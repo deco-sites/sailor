@@ -13,5 +13,13 @@
       "__resolveType": "site/sections/Waves.tsx"
     }
   ],
-  "__resolveType": "website/pages/Page.tsx"
+  "__resolveType": "website/pages/Page.tsx",
+  "seo": {
+    "__resolveType": "website/sections/Seo/SeoV2.tsx",
+    "type": "website",
+    "title": "Sailor",
+    "description": "Message other Sailors",
+    "themeColor": "#23326a",
+    "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11642/05c562f6-9dbd-4332-b747-111ed164f23a"
+  }
 }

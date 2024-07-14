@@ -9,8 +9,7 @@ interface Props {
 }
 
 const onLoad = () => {
-  const [h, w] = [globalThis.innerHeight, globalThis.innerWidth]
-
+  const w = globalThis.innerWidth
   const blobSvg = document.getElementById("blobSvg") as SVGElement | null
   const boat = document.getElementById("boat")
   const boatPeer = document.getElementById("boatPeer")
@@ -23,8 +22,8 @@ const onLoad = () => {
     return point
   }
 
-  const animateBoat = () => {
-    if (!boat || !wave) return
+  const calculateFirstBoat = () => {
+    const [h, w] = [globalThis.innerHeight, globalThis.innerWidth]
 
     let linpx: number
     let a: number
@@ -37,15 +36,13 @@ const onLoad = () => {
       linpx = 64
     }
 
-    const point = getPathAtPos(wave, linpx)
+    if (!boat) return [linpx, a]
     boat.style.left = `${linpx}px`
-    boat.style.top = `${point.y * a}px`
-
-    requestAnimationFrame(animateBoat)
+    return [linpx, a]
   }
 
-  const animateBoatPeer = () => {
-    if (!boatPeer || !wave) return
+  const calculateSecondBoat = () => {
+    const [h, w] = [globalThis.innerHeight, globalThis.innerWidth]
 
     let rinpx: number
     let a: number
@@ -57,6 +54,28 @@ const onLoad = () => {
       a = h / 720
       rinpx = w - 128
     }
+
+    if (!boat) return [rinpx, a]
+    boat.style.left = `${rinpx}px`
+    return [rinpx, a]
+  }
+
+  const animateBoat = () => {
+    if (!boat || !wave) return
+
+    const [linpx, a] = calculateFirstBoat()
+
+    const point = getPathAtPos(wave, linpx)
+    boat.style.left = `${linpx}px`
+    boat.style.top = `${point.y * a}px`
+
+    requestAnimationFrame(animateBoat)
+  }
+
+  const animateBoatPeer = () => {
+    if (!boatPeer || !wave) return
+
+    const [rinpx, a] = calculateSecondBoat()
 
     const point = getPathAtPos(wave, rinpx)
     boatPeer.style.left = `${rinpx}px`
@@ -81,6 +100,11 @@ const onLoad = () => {
 
   waitForPathToLoad(animateBoatPeer)
   waitForPathToLoad(animateBoat)
+
+  globalThis.addEventListener("resize", () => {
+    calculateFirstBoat()
+    calculateSecondBoat()
+  })
 }
 
 export default function Section() {

@@ -7,9 +7,18 @@ const onLoad = () => {
     document.getElementById("create")?.click()
 
     document.getElementById("link")?.addEventListener("click", () => {
+      const currUrl = document.getElementById("currentUrl")
       const roomId = document.getElementById("roomId")?.innerHTML
-      navigator.clipboard.writeText(`http://localhost:8000/receive#${roomId}`)
+      navigator.clipboard.writeText(`${currUrl?.innerHTML}/receive#${roomId}`)
     })
+  })
+
+  globalThis.addEventListener("htmx:wsAfterSend", () => {
+    const currUrl = document.getElementById("currentUrl")
+    console.log("window.location.href", window.location.href)
+    if (currUrl) {
+      currUrl.innerHTML = window.location.href.toString() + "receive#"
+    }
   })
 }
 
@@ -52,7 +61,8 @@ export default function Section() {
             <div class="flex flex-row gap-1 text-sm text-secondary">
               <p>send them this link:</p>
               <p class="cursor-pointer" id="link">
-                http://localhost:8000/receive#<span id="roomId"></span>
+                <span id="currentUrl"></span>
+                <span id="roomId"></span>
               </p>
             </div>
           </div>
