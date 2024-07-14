@@ -14,21 +14,20 @@
     "--tab-border": "1px",
     "--tab-radius": "0.5rem"
   },
+  "mode": "light",
+  "mainColors": {
+    "base-100": "#202C34",
+    "primary": "#196281",
+    "secondary": "#87C0CB",
+    "tertiary": "#FFFFFF"
+  },
   "font": {
     "__resolveType": "website/loaders/fonts/googleFonts.ts",
     "fonts": [
       {
         "variations": [],
-        "family": "Arapey"
+        "family": "Bodoni Moda SC"
       }
     ]
-  },
-  "mode": "light",
-  "mainColors": {
-    "base-100": "#253737",
-    "primary": "#496D67",
-    "secondary": "#6BAE6D",
-    "tertiary": "#ffed75",
-    "neutral": "#FFFFFF"
   }
 }

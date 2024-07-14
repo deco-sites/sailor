@@ -14,21 +14,12 @@
     "--tab-border": "1px",
     "--tab-radius": "0.5rem"
   },
-  "font": {
-    "__resolveType": "website/loaders/fonts/googleFonts.ts",
-    "fonts": [
-      {
-        "variations": [],
-        "family": "Arapey"
-      }
-    ]
-  },
   "mode": "light",
   "mainColors": {
-    "base-100": "#253737",
-    "primary": "#496D67",
-    "secondary": "#6BAE6D",
-    "tertiary": "#ffed75",
-    "neutral": "#FFFFFF"
+    "base-100": "#FFB672",
+    "primary": "#C34E28",
+    "secondary": "#FFE15E",
+    "tertiary": "#FFE15E",
+    "neutral": "#C34E28"
   }
 }
