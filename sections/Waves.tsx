@@ -1,4 +1,5 @@
 import { useScript } from "deco/hooks/useScript.ts"
+import { Boat } from "site/components/Boat.tsx"
 
 interface Props {
   /**
@@ -8,13 +9,14 @@ interface Props {
 }
 
 const onLoad = () => {
-  let [h, w] = [window.innerHeight, window.innerWidth]
+  const [h, w] = [globalThis.innerHeight, globalThis.innerWidth]
 
   const blobSvg = document.getElementById("blobSvg") as SVGElement | null
   const boat = document.getElementById("boat")
-  const wave = document.getElementById("wave")
+  const boatPeer = document.getElementById("boatPeer")
+  const wave = document.getElementById("wave") as SVGPathElement | null
 
-  const getPathAtPos = (path: SVGElement, pos: number) => {
+  const getPathAtPos = (path: SVGPathElement, pos: number) => {
     const totalLength = path.getTotalLength()
     const waveLength = totalLength * 0.2
     const point = path.getPointAtLength((waveLength * pos) / w)
@@ -22,24 +24,54 @@ const onLoad = () => {
   }
 
   const animateBoat = () => {
-    let linpx
+    if (!boat || !wave) return
+
+    let linpx: number
+    let a: number
     if (w > 1030) {
-      let rem = (w - 1032) / 2
-      linpx = rem + 44
+      const rem = (w - 1032) / 2
+      linpx = rem + 64
+      a = h / 300
     } else {
-      linpx = 44
+      a = h / 700
+      linpx = 64
     }
 
     const point = getPathAtPos(wave, linpx)
-    let a = h / 300
     boat.style.left = `${linpx}px`
     boat.style.top = `${point.y * a}px`
 
     requestAnimationFrame(animateBoat)
   }
 
-  function waitForPathToLoad(callback) {
-    const blobPath = blobSvg.querySelector("#wave")
+  const animateBoatPeer = () => {
+    if (!boatPeer || !wave) return
+
+    let rinpx: number
+    let a: number
+    if (w > 1030) {
+      const rem = (w - 1032) / 2
+      rinpx = 1032 + rem - 128
+      a = h / 300
+    } else {
+      a = h / 700
+      rinpx = w - 128
+    }
+
+    const point = getPathAtPos(wave, rinpx)
+    boatPeer.style.left = `${rinpx}px`
+    boatPeer.style.top = `${point.y * a}px`
+
+    requestAnimationFrame(animateBoatPeer)
+  }
+
+  function waitForPathToLoad(callback: () => void) {
+    if (!blobSvg) {
+      requestAnimationFrame(() => waitForPathToLoad(callback))
+      return
+    }
+
+    const blobPath = blobSvg.querySelector("#wave") as SVGPathElement
     if (blobPath && blobPath.getTotalLength() > 0) {
       callback()
     } else {
@@ -47,10 +79,11 @@ const onLoad = () => {
     }
   }
 
+  waitForPathToLoad(animateBoatPeer)
   waitForPathToLoad(animateBoat)
 }
 
-export default function Section({ name = "Capy" }: Props) {
+export default function Section() {
   return (
     <>
       <script
@@ -97,12 +130,14 @@ export default function Section({ name = "Capy" }: Props) {
                 ></animate>
               </path>
             </svg>
-            <svg id="boat" class="absolute w-14" viewBox="0 0 64 64">
-              <path
-                fill="#fff"
-                d="M32 2c-1.1 0-2 .9-2 2v44c0 1.1.9 2 2 2s2-.9 2-2V4c0-1.1-.9-2-2-2zm0 48c-3.3 0-6-2.7-6-6H10.6c-.4 0-.8.2-1 .5l-4.2 6.7c-.4.7-.1 1.6.7 2 .2.1.4.1.6.1h48c.4 0 .8-.2 1-.5.4-.7.1-1.6-.7-2l-4.2-6.7c-.2-.3-.6-.5-1-.5H38c0 3.3-2.7 6-6 6zm8-12h8c1.1 0 2-.9 2-2s-.9-2-2-2H24c-1.1 0-2 .9-2 2s.9 2 2 2h8z"
-              />
-            </svg>
+            <div>
+              <div id="boat" class=" absolute w-14">
+                <Boat />
+              </div>
+              <div id="boatPeer" class="absolute w-14 transform scaleY(-1)">
+                <Boat inverted />
+              </div>
+            </div>
           </div>
         </div>
       </div>
