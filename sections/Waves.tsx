@@ -100,7 +100,6 @@ export default function Section() {
               viewBox="0 0 500 700"
               id="blobSvg"
               preserveAspectRatio="none"
-              style="margin-top: -10px"
             >
               <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">

@@ -27,13 +27,23 @@ export default function Section() {
       <div class="flex flex-col h-full w-full justify-center">
         <div hx-ext="ws" ws-connect="/ws" hx-target="#roomId">
           <form hx-trigger="click" id="form" ws-send>
-            <input class="hidden" name="type" value="create" />
-            <button class="hidden" id="create" type={"button"}></button>
+            <input
+              aria-hidden="true"
+              class="hidden"
+              name="type"
+              value="create"
+            />
+            <button
+              aria-hidden="true"
+              class="hidden"
+              id="create"
+              type={"button"}
+            ></button>
           </form>
 
           <div
             id="startText"
-            class="flex flex-col justify-center items-center absolute top-0 mt-10 left-0 right-0 mx-auto text-slate-200 gap-3"
+            class="flex flex-col justify-center items-center absolute top-0 mt-10 left-0 right-0 mx-auto text-slate-200 gap-3 z-20"
           >
             <h1 class="text-sm">YOU ARE A LONE SAILOR...</h1>
             <h2 class="text-2xl">INVITE SOMEONE TO SAIL WITH YOU?</h2>

@@ -68,7 +68,7 @@ export const handler: Handlers = {
           room.owner.send(
             `
               <div id="startText" hx-swap-oob="outerHTML">
-              <span class="hidden" id="roomId"></span>
+                <span class="hidden" id="roomId"></span>
               </div>
             `,
           );

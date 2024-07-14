@@ -26,10 +26,16 @@ export default function Section() {
       <Chat />
 
       <div hx-ext="ws" ws-connect="/ws">
-        <form class="hidden" hx-trigger="click" id="form" ws-send>
-          <input name="type" value="join" />
-          <input id="roomId" name="roomId" value="69420" />
-          <button id="join" type="submit"></button>
+        <form
+          aria-hidden="true"
+          class="hidden"
+          hx-trigger="click"
+          id="form"
+          ws-send
+        >
+          <input aria-hidden="true" name="type" value="join" />
+          <input aria-hidden="true" id="roomId" name="roomId" value="69420" />
+          <button aria-hidden="true" id="join" type="submit"></button>
         </form>
 
         <MessageBox />
