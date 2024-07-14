@@ -14,6 +14,8 @@ const onLoad = () => {
   const boat = document.getElementById("boat")
   const boatPeer = document.getElementById("boatPeer")
   const wave = document.getElementById("wave") as SVGPathElement | null
+  let shouldCalculatePeer = !!window.location.hash
+  let newPos = -100
 
   const getPathAtPos = (path: SVGPathElement, pos: number) => {
     const totalLength = path.getTotalLength()
@@ -22,7 +24,7 @@ const onLoad = () => {
     return point
   }
 
-  const calculateFirstBoat = () => {
+  const calculatePeerBoat = () => {
     const [h, w] = [globalThis.innerHeight, globalThis.innerWidth]
 
     let linpx: number
@@ -36,12 +38,18 @@ const onLoad = () => {
       linpx = 64
     }
 
-    if (!boat) return [linpx, a]
-    boat.style.left = `${linpx}px`
+    if (!shouldCalculatePeer) {
+      if (!boatPeer) return [10, a]
+      boatPeer.style.left = `${-100}px`
+      return [10, a]
+    }
+
+    if (!boatPeer) return [linpx, a]
+    boatPeer.style.left = `${linpx}px`
     return [linpx, a]
   }
 
-  const calculateSecondBoat = () => {
+  const calculateBoat = () => {
     const [h, w] = [globalThis.innerHeight, globalThis.innerWidth]
 
     let rinpx: number
@@ -60,28 +68,27 @@ const onLoad = () => {
     return [rinpx, a]
   }
 
-  const animateBoat = () => {
-    if (!boat || !wave) return
-
-    const [linpx, a] = calculateFirstBoat()
-
-    const point = getPathAtPos(wave, linpx)
-    boat.style.left = `${linpx}px`
-    boat.style.top = `${point.y * a}px`
-
-    requestAnimationFrame(animateBoat)
-  }
-
   const animateBoatPeer = () => {
     if (!boatPeer || !wave) return
 
-    const [rinpx, a] = calculateSecondBoat()
+    const [linpx, a] = calculatePeerBoat()
 
-    const point = getPathAtPos(wave, rinpx)
-    boatPeer.style.left = `${rinpx}px`
+    if (!linpx) return
+    const point = getPathAtPos(wave, newPos)
     boatPeer.style.top = `${point.y * a}px`
 
     requestAnimationFrame(animateBoatPeer)
+  }
+
+  const animateBoat = () => {
+    if (!boat || !wave) return
+
+    const [rinpx, a] = calculateBoat()
+    const point = getPathAtPos(wave, rinpx)
+    boat.style.left = `${rinpx}px`
+    boat.style.top = `${point.y * a}px`
+
+    requestAnimationFrame(animateBoat)
   }
 
   function waitForPathToLoad(callback: () => void) {
@@ -98,12 +105,65 @@ const onLoad = () => {
     }
   }
 
-  waitForPathToLoad(animateBoatPeer)
   waitForPathToLoad(animateBoat)
+  waitForPathToLoad(animateBoatPeer)
 
   globalThis.addEventListener("resize", () => {
-    calculateFirstBoat()
-    calculateSecondBoat()
+    calculateBoat()
+    calculatePeerBoat()
+  })
+
+  let leftPos = 0
+  const animatePeerEnter = () => {
+    if (!boatPeer) return
+    leftPos += 0.8
+    newPos = leftPos
+    boatPeer.style.left = leftPos + "px"
+
+    let max = 0
+
+    if (w > 1030) {
+      const rem = (w - 1032) / 2
+      max = rem + 64
+    } else {
+      max = 64
+    }
+
+    if (Number(boatPeer.style.left.slice(0, -2)) >= max) {
+      shouldCalculatePeer = true
+      return
+    }
+
+    requestAnimationFrame(animatePeerEnter)
+  }
+
+  globalThis.addEventListener("htmx:wsAfterMessage", (data: any) => {
+    let message
+    try {
+      message = JSON.parse(data.detail.message)
+    } catch (e) {
+      console.debug(e)
+    }
+
+    if (!message) return
+
+    if (message.type === "peerConnected") {
+      globalThis.alert("peerConn")
+      // trigger the boat animation
+      requestAnimationFrame(animateBoatPeer)
+      // animate boat untill it reaches the correct pos
+      requestAnimationFrame(animatePeerEnter)
+    }
+
+    if (message.type === "ownerDisconnected") {
+      console.log("ownerDisconnected")
+      // sink owner
+    }
+
+    if (message.type === "peerDisconnected") {
+      console.log("peerDisconnected")
+      // sink peer
+    }
   })
 }
 
@@ -145,11 +205,11 @@ export default function Section() {
               </path>
             </svg>
             <div>
-              <div id="boat" class=" absolute w-14">
-                <Boat />
-              </div>
-              <div id="boatPeer" class="absolute w-14 transform scaleY(-1)">
+              <div id="boat" class="absolute w-14">
                 <Boat inverted />
+              </div>
+              <div id="boatPeer" class=" absolute w-14">
+                <Boat />
               </div>
             </div>
           </div>

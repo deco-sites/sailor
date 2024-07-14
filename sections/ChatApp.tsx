@@ -9,13 +9,12 @@ const onLoad = () => {
     document.getElementById("link")?.addEventListener("click", () => {
       const currUrl = document.getElementById("currentUrl")
       const roomId = document.getElementById("roomId")?.innerHTML
-      navigator.clipboard.writeText(`${currUrl?.innerHTML}/receive#${roomId}`)
+      navigator.clipboard.writeText(`${currUrl?.innerHTML}${roomId}`)
     })
   })
 
   globalThis.addEventListener("htmx:wsAfterSend", () => {
     const currUrl = document.getElementById("currentUrl")
-    console.log("window.location.href", window.location.href)
     if (currUrl) {
       currUrl.innerHTML = window.location.href.toString() + "receive#"
     }
