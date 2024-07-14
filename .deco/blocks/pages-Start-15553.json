@@ -11,6 +11,9 @@
     },
     {
       "__resolveType": "site/sections/Waves.tsx"
+    },
+    {
+      "__resolveType": "site/sections/About.tsx"
     }
   ],
   "__resolveType": "website/pages/Page.tsx",
