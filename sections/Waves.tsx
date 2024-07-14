@@ -149,7 +149,6 @@ const onLoad = () => {
       max = 128
     }
 
-    console.log("anim", Number(boatPeer.style.left.slice(0, -2)))
     if (Number(boatPeer.style.left.slice(0, -2)) >= max) {
       shouldCalculatePeer = true
       return
