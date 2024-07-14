@@ -14,15 +14,6 @@
     },
     {
       "__resolveType": "site/sections/About.tsx"
-    },
-    {
-      "__resolveType": "website/sections/Seo/SeoV2.tsx",
-      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11642/edc6f832-558d-4f3c-acdc-540e50638933",
-      "favicon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11642/2ce8f696-3909-4ae4-909c-f3486505bf07",
-      "title": "Sailor",
-      "description": "Exchange messages with other sailors",
-      "type": "website",
-      "themeColor": "#4c6e68"
     }
   ],
   "__resolveType": "website/pages/Page.tsx",
@@ -30,8 +21,9 @@
     "__resolveType": "website/sections/Seo/SeoV2.tsx",
     "type": "website",
     "title": "Sailor",
-    "description": "Message other Sailors",
-    "themeColor": "#23326a",
-    "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11642/05c562f6-9dbd-4332-b747-111ed164f23a"
+    "description": "Exchange messages with other sailors",
+    "themeColor": "#4c6e68",
+    "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11642/edc6f832-558d-4f3c-acdc-540e50638933",
+    "favicon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11642/2ce8f696-3909-4ae4-909c-f3486505bf07"
   }
 }
