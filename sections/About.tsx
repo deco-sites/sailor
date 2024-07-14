@@ -8,6 +8,6 @@ export default function Section() {
         <p>Stars guide his message.</p>
       </div>
     </div>
-    //AAAAAAAAAAAHHHHHHHHHHHHHHHHHH LOAD
+    //HELLLLOOOO???
   )
 }
