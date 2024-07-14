@@ -134,6 +134,7 @@ const onLoad = () => {
 
   let leftPos = 0
   const animatePeerEnter = () => {
+    const w = globalThis.innerWidth
     if (!boatPeer) return
     leftPos += 0.8
     newPos = leftPos
@@ -148,6 +149,7 @@ const onLoad = () => {
       max = 128
     }
 
+    console.log("anim", Number(boatPeer.style.left.slice(0, -2)))
     if (Number(boatPeer.style.left.slice(0, -2)) >= max) {
       shouldCalculatePeer = true
       return
@@ -169,7 +171,7 @@ const onLoad = () => {
     }
 
     peerDeph += 1
-    if (peerDeph > 420) {
+    if (peerDeph > 690) {
       boatPeer.hidden = true
       return
     }
