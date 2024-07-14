@@ -1,3 +1,31 @@
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+@media screen and (min-width: 1024px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #aeaeae;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -1,5 +1,5 @@
-import { asset } from "$fresh/runtime.ts";
-import type { JSX } from "preact";
+import { asset } from "$fresh/runtime.ts"
+import type { JSX } from "preact"
 
 export type AvailableIcons =
   | "ChevronLeft"
@@ -34,7 +34,7 @@ export type AvailableIcons =
   | "Trash"
   | "FilterList"
   | "WhatsApp"
-  | "ArrowsPointingOut";
+  | "ArrowsPointingOut"
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**
@@ -42,13 +42,18 @@ interface Props extends JSX.SVGAttributes<SVGSVGElement> {
    *
    * Example: <Icon id="Bell" />
    */
-  id: AvailableIcons;
-  size?: number;
+  id: AvailableIcons
+  size?: number
 }
 
-function Icon(
-  { id, strokeWidth = 16, size, width, height, ...otherProps }: Props,
-) {
+function Icon({
+  id,
+  strokeWidth = 16,
+  size,
+  width,
+  height,
+  ...otherProps
+}: Props) {
   return (
     <svg
       {...otherProps}
@@ -58,7 +63,7 @@ function Icon(
     >
       <use href={asset(`/sprites.svg#${id}`)} />
     </svg>
-  );
+  )
 }
 
-export default Icon;
+export default Icon

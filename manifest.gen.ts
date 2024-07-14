@@ -5,14 +5,20 @@
 import * as $$$$$$$$$$$0 from "./apps/deco/htmx.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 import * as $$$$$$0 from "./sections/ItWorks.tsx";
-import * as $$$$$$2 from "./sections/starstuff/StarBG.tsx";
-import * as $$$$$$1 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$1 from "./sections/starstuff/StarBG.tsx";
+import * as $$$$$$2 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$3 from "./sections/MessageBox.tsx";
+import * as $$$$$$4 from "./sections/Peer.tsx";
+import * as $$$$$$5 from "./sections/Waves.tsx";
 
 const manifest = {
   "sections": {
     "site/sections/ItWorks.tsx": $$$$$$0,
-    "site/sections/starstuff/StarBG.tsx": $$$$$$2,
-    "site/sections/Theme/Theme.tsx": $$$$$$1,
+    "site/sections/starstuff/StarBG.tsx": $$$$$$1,
+    "site/sections/Theme/Theme.tsx": $$$$$$2,
+    "site/sections/MessageBox.tsx": $$$$$$3,
+    "site/sections/Peer.tsx": $$$$$$4,
+    "site/sections/Waves.tsx": $$$$$$5,
   },
   "apps": {
     "site/apps/deco/htmx.ts": $$$$$$$$$$$0,

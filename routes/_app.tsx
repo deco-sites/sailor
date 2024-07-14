@@ -1,10 +1,10 @@
-import { asset, Head } from "$fresh/runtime.ts";
-import { defineApp } from "$fresh/server.ts";
-import { Context } from "deco/deco.ts";
-import Theme from "../sections/Theme/Theme.tsx";
+import { asset, Head } from "$fresh/runtime.ts"
+import { defineApp } from "$fresh/server.ts"
+import { Context } from "deco/deco.ts"
+import Theme from "../sections/Theme/Theme.tsx"
 
 export default defineApp(async (_req, ctx) => {
-  const revision = await Context.active().release?.revision();
+  const revision = await Context.active().release?.revision()
 
   return (
     <>
@@ -26,7 +26,9 @@ export default defineApp(async (_req, ctx) => {
       </Head>
 
       {/* Rest of Preact tree */}
-      <ctx.Component />
+      <main class="h-screen bg-[#020617]">
+        <ctx.Component />
+      </main>
     </>
-  );
-});
+  )
+})

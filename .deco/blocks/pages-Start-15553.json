@@ -10,6 +10,9 @@
       "__resolveType": "site/sections/ItWorks.tsx",
       "name": "<p>It Works!</p>",
       "count": 1
+    },
+    {
+      "__resolveType": "site/sections/Waves.tsx"
     }
   ],
   "__resolveType": "website/pages/Page.tsx"
