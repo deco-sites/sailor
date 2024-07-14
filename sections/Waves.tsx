@@ -14,8 +14,8 @@ const onLoad = () => {
 
   const showToast = (msmg: string, error?: boolean) => {
     const toast = document.createElement("div")
-    toast.className = `absolute top-0 mt-10 z-20 left-0 right-0 mx-auto w-full  ${
-      error ? "bg-red-500 text-white" : "bg-base-100"
+    toast.className = `absolute top-0 mt-10 z-20 left-0 right-0 mx-auto w-full text-white ${
+      error ? "bg-red-500" : "bg-secondary"
     } shadow-xl p-2 max-w-48 rounded-md`
     toast.id = "toast"
 
