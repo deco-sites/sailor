@@ -65,16 +65,15 @@ const onLoad = () => {
 
   const animateBoatPeer = () => {
     if (!boatPeer || !wave) return
-
     const [linpx, a] = calculatePeerBoat()
 
     if (!linpx) return
-    const point = getPathAtPos(wave, window.location.hash ? linpx : newPos)
+    const pox = window.location.hash ? linpx : newPos
+    const point = getPathAtPos(wave, pox)
 
     peerDeph = point.y * a
-
     if (shouldPeerSink) return
-    boatPeer.style.top = `${point.y * a}px`
+    boatPeer.style.top = `${peerDeph}px`
 
     requestAnimationFrame(animateBoatPeer)
   }
@@ -166,7 +165,6 @@ const onLoad = () => {
       console.debug(e)
     }
 
-    console.log("message", message)
     if (!message) return
 
     if (message.type === "peerConnected") {
@@ -177,13 +175,11 @@ const onLoad = () => {
     }
 
     if (message.type === "ownerDisconnected") {
-      console.log("ownerDisconnected")
       shouldPeerSink = true
       requestAnimationFrame(animatePeerSink)
     }
 
     if (message.type === "peerDisconnected") {
-      console.log("peerDisconnected")
       shouldPeerSink = true
       requestAnimationFrame(animatePeerSink)
     }
