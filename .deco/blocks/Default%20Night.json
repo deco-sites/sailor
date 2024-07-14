@@ -19,7 +19,8 @@
     "base-100": "#0D111D",
     "primary": "#242D68",
     "secondary": "#846CD9",
-    "tertiary": "#B246FF"
+    "tertiary": "#B246FF",
+    "neutral": "#FFFFFF"
   },
   "font": {
     "__resolveType": "website/loaders/fonts/googleFonts.ts",

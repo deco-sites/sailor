@@ -10,7 +10,7 @@ const onLoad = () => {
   let shouldCalculatePeer = !!window.location.hash
   let shouldPeerSink = false
   let peerDeph = 0
-  let newPos = -100
+  let newPos = -240
 
   const showToast = (msmg: string, error?: boolean) => {
     const toast = document.createElement("div")
@@ -35,7 +35,7 @@ const onLoad = () => {
 
   const getPathAtPos = (path: SVGPathElement, pos: number) => {
     const totalLength = path.getTotalLength()
-    const waveLength = totalLength * 0.2
+    const waveLength = totalLength * 0.22
     const point = path.getPointAtLength((waveLength * pos) / w)
     return point
   }
@@ -47,16 +47,16 @@ const onLoad = () => {
     let a: number
     if (w > 1030) {
       const rem = (w - 1032) / 2
-      linpx = rem + 64
+      linpx = rem + 128
       a = h / 300
     } else {
-      a = h / 720
-      linpx = 64
+      a = h / 700
+      linpx = 128
     }
 
     if (!shouldCalculatePeer) {
       if (!boatPeer) return [10, a]
-      boatPeer.style.left = `${-100}px`
+      boatPeer.style.left = `${-240}px`
       return [10, a]
     }
 
@@ -75,7 +75,7 @@ const onLoad = () => {
       rinpx = 1032 + rem - 128
       a = h / 300
     } else {
-      a = h / 720
+      a = h / 700
       rinpx = w - 128
     }
 
@@ -92,7 +92,7 @@ const onLoad = () => {
     const pox = window.location.hash ? linpx : newPos
     const point = getPathAtPos(wave, pox)
 
-    peerDeph = point.y * a
+    peerDeph = point.y * a - 80
     if (shouldPeerSink) return
     boatPeer.style.top = `${peerDeph}px`
 
@@ -106,7 +106,7 @@ const onLoad = () => {
     const point = getPathAtPos(wave, rinpx)
     boat.style.left = `${rinpx}px`
 
-    boat.style.top = `${point.y * a}px`
+    boat.style.top = `${point.y * a - 80}px`
     requestAnimationFrame(animateBoat)
   }
 
@@ -143,9 +143,9 @@ const onLoad = () => {
 
     if (w > 1030) {
       const rem = (w - 1032) / 2
-      max = rem + 64
+      max = rem + 128
     } else {
-      max = 64
+      max = 128
     }
 
     if (Number(boatPeer.style.left.slice(0, -2)) >= max) {
@@ -223,7 +223,7 @@ export default function Section() {
         dangerouslySetInnerHTML={{ __html: useScript(onLoad) }}
       />
 
-      <div class="absolute flex flex-col absolute top-[50%] left-0 right-0 ">
+      <div class="absolute flex flex-col absolute top-[50%] left-0 right-0 max-h-[60%] overflow-hidden z-10">
         <div class="flex flex-col h-full relative">
           <div class="w-full relative">
             <svg
@@ -239,15 +239,14 @@ export default function Section() {
                   dur="8000ms"
                   repeatCount="indefinite"
                   values="
-                  M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,700 L0.00,700 Z;
-                  M0.00,49.98 C149.99,150 202.88,48.86 500.00,49.98 L500.00,700 L0.00,700 Z;
-                  M0.00,49.98 C184.25,129.78 96.22,14.31 500.00,49.98 L500.00,700 L0.00,700 Z;
-                  M0.00,49.98 C12.13,43.92 96.22,14.31 500.00,49.98 L500.00,700 L0.00,700 Z;
-                  M0.00,49.98 C12.13,43.92 128.94,116.95 500.00,49.98 L500.00,700 L0.00,700 Z;
-                  M0.00,49.98 C241.82,24.19 128.94,116.95 500.00,49.98 L500.00,700 L0.00,700 Z;
-                  M0.00,49.98 C405.47,10.38 254.79,113.98 500.00,49.98 L500.00,700 L0.00,700.00 Z;
-                  M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,700.00 L0.00,700.00 Z;
-                 "
+                    M-64.61,49.84 C25.52,-25.14 96.22,134.72 525.11,38.00 L500.00,700.00 L0.00,700.00 Z;
+                    M-64.61,49.84 C40.91,23.20 276.24,61.69 525.11,38.00 L500.00,700.00 L0.00,700.00 Z;
+                    M-64.61,49.84 C313.37,57.73 229.28,10.39 555.11,38.00 L500.00,700.00 L0.00,700.00 Z;
+                    M-64.61,49.84 C242.37,66.63 296.32,25.56 631.65,50.44 L500.00,700.00 L0.00,700.00 Z;
+                    M-64.61,49.84 C142.37,-25.14 196.22,35.72 525.11,38.00 L500.00,700.00 L0.00,700.00 Z;
+                    M-64.61,49.84 C90.37,-25.14 96.22,61.69 625.11,38.00 L500.00,700.00 L0.00,700.00 Z;
+                    M-64.61,49.84 C25.52,-25.14 96.22,134.72 525.11,38.00 L500.00,700.00 L0.00,700.00 Z;
+                  "
                 ></animate>
               </path>
             </svg>

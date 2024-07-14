@@ -15,14 +15,14 @@ export default function Section() {
     <>
       <script dangerouslySetInnerHTML={{ __html: useScript(onLoad) }} />
       <form
-        class="flex absolute bottom-0 mb-8 left-0 right-0 mx-auto z-50 justify-center "
+        class="flex absolute bottom-0 mb-8 left-0 right-0 mx-auto z-50 justify-center"
         id="form"
         ws-send
       >
         <div class="flex gap-2 items-center">
           <input class="hidden" name="type" value="message" />
           <input
-            class="w-full p-2 rounded-md h-8 border-gray-200 sm:text-sm placeholder:text-sm bg-secondary"
+            class="w-full p-2 rounded-md h-8 sm:text-sm placeholder:text-sm placeholder:text-slate-100 bg-secondary"
             type="text"
             name="content"
             id="content"

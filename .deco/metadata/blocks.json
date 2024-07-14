@@ -78,5 +78,13 @@
   "/.deco/blocks/Sun.json": {
     "blockType": "sections",
     "__resolveType": "site/sections/Theme/Theme.tsx"
+  },
+  "/.deco/blocks/Bright.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Theme/Theme.tsx"
+  },
+  "/.deco/blocks/Aether.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Theme/Theme.tsx"
   }
 }

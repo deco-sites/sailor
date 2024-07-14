@@ -31,7 +31,7 @@ export default defineApp(async (_req, ctx) => {
       </Head>
 
       {/* Rest of Preact tree */}
-      <main class="h-screen">
+      <main class="h-screen overflow-x-clip">
         <ctx.Component />
       </main>
     </>
