@@ -1,9 +1,9 @@
 import { useScript } from "deco/hooks/useScript.ts"
 
 const onLoad = (numberOfStars: number) => {
-  if (numberOfStars > 10) {
-    numberOfStars = 10
-    console.log("CANNOT HAVE MORE THAN 10 STARS")
+  if (numberOfStars > 20) {
+    numberOfStars = 20
+    console.log("CANNOT HAVE MORE THAN 20 STARS")
   }
 
   function addStarComponent() {
