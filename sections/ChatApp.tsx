@@ -15,7 +15,6 @@ const onLoad = () => {
 
   globalThis.addEventListener("htmx:wsAfterSend", () => {
     const currUrl = document.getElementById("currentUrl")
-    console.log("window.location.href", window.location.href)
     if (currUrl) {
       currUrl.innerHTML = window.location.href.toString() + "receive#"
     }
@@ -33,7 +32,7 @@ export default function Section() {
 
       <Chat />
 
-      <div class="flex flex-col h-full w-full justify-center ">
+      <div id="apd" class="flex flex-col h-full w-full justify-center ">
         <div hx-ext="ws" ws-connect="/ws" hx-target="#roomId">
           <form hx-trigger="click" id="form" ws-send>
             <input

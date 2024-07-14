@@ -4,21 +4,23 @@
 
 import * as $$$$$$$$$$$0 from "./apps/deco/htmx.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
-import * as $$$$$$0 from "./sections/ChatApp.tsx";
-import * as $$$$$$1 from "./sections/MessageBox.tsx";
-import * as $$$$$$2 from "./sections/Peer.tsx";
-import * as $$$$$$5 from "./sections/starstuff/StarBG.tsx";
-import * as $$$$$$3 from "./sections/Theme/Theme.tsx";
-import * as $$$$$$4 from "./sections/Waves.tsx";
+import * as $$$$$$0 from "./sections/About.tsx";
+import * as $$$$$$1 from "./sections/ChatApp.tsx";
+import * as $$$$$$2 from "./sections/MessageBox.tsx";
+import * as $$$$$$3 from "./sections/Peer.tsx";
+import * as $$$$$$6 from "./sections/starstuff/StarBG.tsx";
+import * as $$$$$$4 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$5 from "./sections/Waves.tsx";
 
 const manifest = {
   "sections": {
-    "site/sections/ChatApp.tsx": $$$$$$0,
-    "site/sections/MessageBox.tsx": $$$$$$1,
-    "site/sections/Peer.tsx": $$$$$$2,
-    "site/sections/starstuff/StarBG.tsx": $$$$$$5,
-    "site/sections/Theme/Theme.tsx": $$$$$$3,
-    "site/sections/Waves.tsx": $$$$$$4,
+    "site/sections/About.tsx": $$$$$$0,
+    "site/sections/ChatApp.tsx": $$$$$$1,
+    "site/sections/MessageBox.tsx": $$$$$$2,
+    "site/sections/Peer.tsx": $$$$$$3,
+    "site/sections/starstuff/StarBG.tsx": $$$$$$6,
+    "site/sections/Theme/Theme.tsx": $$$$$$4,
+    "site/sections/Waves.tsx": $$$$$$5,
   },
   "apps": {
     "site/apps/deco/htmx.ts": $$$$$$$$$$$0,

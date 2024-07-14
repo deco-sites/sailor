@@ -1,19 +1,37 @@
 import { useScript } from "deco/hooks/useScript.ts"
 import { Boat } from "site/components/Boat.tsx"
 
-interface Props {
-  /**
-   * @description The description of name.
-   */
-  name?: string
-}
-
 const onLoad = () => {
   const w = globalThis.innerWidth
   const blobSvg = document.getElementById("blobSvg") as SVGElement | null
   const boat = document.getElementById("boat")
   const boatPeer = document.getElementById("boatPeer")
   const wave = document.getElementById("wave") as SVGPathElement | null
+  let shouldCalculatePeer = !!window.location.hash
+  let shouldPeerSink = false
+  let peerDeph = 0
+  let newPos = -100
+
+  const showToast = (msmg: string, error?: boolean) => {
+    const toast = document.createElement("div")
+    toast.className = `absolute top-0 mt-10 z-20 left-0 right-0 mx-auto w-full  ${
+      error ? "bg-red-500 text-white" : "bg-base-100"
+    } shadow-xl p-2 max-w-48 rounded-md`
+    toast.id = "toast"
+
+    const txt = document.createElement("p")
+    txt.innerText = msmg
+    txt.className = "text-xs"
+    toast.appendChild(txt)
+
+    const apd = document.getElementById("apd")
+
+    apd?.appendChild(toast)
+
+    setTimeout(() => {
+      document.getElementById("toast")?.remove()
+    }, 2398)
+  }
 
   const getPathAtPos = (path: SVGPathElement, pos: number) => {
     const totalLength = path.getTotalLength()
@@ -22,7 +40,7 @@ const onLoad = () => {
     return point
   }
 
-  const calculateFirstBoat = () => {
+  const calculatePeerBoat = () => {
     const [h, w] = [globalThis.innerHeight, globalThis.innerWidth]
 
     let linpx: number
@@ -36,12 +54,18 @@ const onLoad = () => {
       linpx = 64
     }
 
-    if (!boat) return [linpx, a]
-    boat.style.left = `${linpx}px`
+    if (!shouldCalculatePeer) {
+      if (!boatPeer) return [10, a]
+      boatPeer.style.left = `${-100}px`
+      return [10, a]
+    }
+
+    if (!boatPeer) return [linpx, a]
+    boatPeer.style.left = `${linpx}px`
     return [linpx, a]
   }
 
-  const calculateSecondBoat = () => {
+  const calculateBoat = () => {
     const [h, w] = [globalThis.innerHeight, globalThis.innerWidth]
 
     let rinpx: number
@@ -60,28 +84,30 @@ const onLoad = () => {
     return [rinpx, a]
   }
 
+  const animateBoatPeer = () => {
+    if (!boatPeer || !wave) return
+    const [linpx, a] = calculatePeerBoat()
+
+    if (!linpx) return
+    const pox = window.location.hash ? linpx : newPos
+    const point = getPathAtPos(wave, pox)
+
+    peerDeph = point.y * a
+    if (shouldPeerSink) return
+    boatPeer.style.top = `${peerDeph}px`
+
+    requestAnimationFrame(animateBoatPeer)
+  }
+
   const animateBoat = () => {
     if (!boat || !wave) return
 
-    const [linpx, a] = calculateFirstBoat()
-
-    const point = getPathAtPos(wave, linpx)
-    boat.style.left = `${linpx}px`
-    boat.style.top = `${point.y * a}px`
-
-    requestAnimationFrame(animateBoat)
-  }
-
-  const animateBoatPeer = () => {
-    if (!boatPeer || !wave) return
-
-    const [rinpx, a] = calculateSecondBoat()
-
+    const [rinpx, a] = calculateBoat()
     const point = getPathAtPos(wave, rinpx)
-    boatPeer.style.left = `${rinpx}px`
-    boatPeer.style.top = `${point.y * a}px`
+    boat.style.left = `${rinpx}px`
 
-    requestAnimationFrame(animateBoatPeer)
+    boat.style.top = `${point.y * a}px`
+    requestAnimationFrame(animateBoat)
   }
 
   function waitForPathToLoad(callback: () => void) {
@@ -98,12 +124,93 @@ const onLoad = () => {
     }
   }
 
-  waitForPathToLoad(animateBoatPeer)
   waitForPathToLoad(animateBoat)
+  waitForPathToLoad(animateBoatPeer)
 
   globalThis.addEventListener("resize", () => {
-    calculateFirstBoat()
-    calculateSecondBoat()
+    calculateBoat()
+    calculatePeerBoat()
+  })
+
+  let leftPos = 0
+  const animatePeerEnter = () => {
+    if (!boatPeer) return
+    leftPos += 0.8
+    newPos = leftPos
+    boatPeer.style.left = leftPos + "px"
+
+    let max = 0
+
+    if (w > 1030) {
+      const rem = (w - 1032) / 2
+      max = rem + 64
+    } else {
+      max = 64
+    }
+
+    if (Number(boatPeer.style.left.slice(0, -2)) >= max) {
+      shouldCalculatePeer = true
+      return
+    }
+
+    requestAnimationFrame(animatePeerEnter)
+  }
+
+  let peerTilt = 0
+
+  const animatePeerSink = () => {
+    if (!boatPeer) return
+    peerTilt += 0.6
+
+    if (peerTilt < 62) {
+      boatPeer.style.transform = `rotate(${-peerTilt}deg)`
+      requestAnimationFrame(animatePeerSink)
+      return
+    }
+
+    peerDeph += 1
+    if (peerDeph > 420) {
+      boatPeer.hidden = true
+      return
+    }
+
+    boatPeer.style.top = peerDeph + "px"
+    requestAnimationFrame(animatePeerSink)
+  }
+
+  globalThis.addEventListener("htmx:wsAfterMessage", (data: any) => {
+    let message
+    try {
+      message = JSON.parse(data.detail.message)
+    } catch (e) {
+      console.debug(e)
+    }
+
+    if (!message) return
+
+    if (message.type === "peerConnected") {
+      showToast("Peer connected")
+      // trigger the boat animation
+      requestAnimationFrame(animateBoatPeer)
+      // animate boat untill it reaches the correct pos
+      requestAnimationFrame(animatePeerEnter)
+    }
+
+    if (message.type === "ownerDisconnected") {
+      showToast("Peer disconnected")
+      shouldPeerSink = true
+      requestAnimationFrame(animatePeerSink)
+    }
+
+    if (message.type === "peerDisconnected") {
+      showToast("Peer disconnected")
+      shouldPeerSink = true
+      requestAnimationFrame(animatePeerSink)
+    }
+
+    if (message.type === "error") {
+      showToast(message.description || "An error has ocurred", true)
+    }
   })
 }
 
@@ -145,11 +252,11 @@ export default function Section() {
               </path>
             </svg>
             <div>
-              <div id="boat" class=" absolute w-14">
-                <Boat />
-              </div>
-              <div id="boatPeer" class="absolute w-14 transform scaleY(-1)">
+              <div id="boat" class="absolute w-14">
                 <Boat inverted />
+              </div>
+              <div id="boatPeer" class=" absolute w-14">
+                <Boat />
               </div>
             </div>
           </div>

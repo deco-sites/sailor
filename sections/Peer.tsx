@@ -25,7 +25,7 @@ export default function Section() {
 
       <Chat />
 
-      <div hx-ext="ws" ws-connect="/ws">
+      <div id="apd" hx-ext="ws" ws-connect="/ws">
         <form
           aria-hidden="true"
           class="hidden"

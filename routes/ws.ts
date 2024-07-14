@@ -73,6 +73,10 @@ export const handler: Handlers = {
             `,
           );
 
+          room.owner.send(JSON.stringify({
+            type: "peerConnected",
+          }));
+
           return;
         }
 
@@ -86,7 +90,7 @@ export const handler: Handlers = {
         socket.send(
           JSON.stringify({
             type: "error",
-            description: "No room found for that id",
+            description: "No room found for this id",
           }),
         );
       }
