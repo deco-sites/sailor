@@ -4,61 +4,61 @@
  * License: MIT (https://github.com/saadeghi/daisyui/blob/37bca23444bc9e4d304362c14b7088f9a08f1c74/LICENSE)
  * https://github.com/saadeghi/daisyui/blob/37bca23444bc9e4d304362c14b7088f9a08f1c74/src/docs/src/routes/theme-generator.svelte
  */
-import SiteTheme, { Font } from "apps/website/components/Theme.tsx";
-import Color from "npm:colorjs.io";
-import type { ComponentChildren } from "preact";
+import SiteTheme, { Font } from "apps/website/components/Theme.tsx"
+import Color from "npm:colorjs.io"
+import type { ComponentChildren } from "preact"
 
 export interface ThemeColors {
   /**
    * @format color-input
    * @title Base
    */
-  "base-100"?: string;
+  "base-100"?: string
   /** @format color-input */
-  "primary"?: string;
+  primary?: string
   /** @format color-input */
-  "secondary"?: string;
+  secondary?: string
   /**
    * @title Accent
    * @format color-input */
-  "tertiary"?: string;
+  tertiary?: string
   /** @format color-input */
-  "neutral"?: string;
+  neutral?: string
   /** @format color-input */
-  "success"?: string;
+  success?: string
   /** @format color-input */
-  "warning"?: string;
+  warning?: string
   /** @format color-input */
-  "error"?: string;
+  error?: string
   /** @format color-input */
-  "info"?: string;
+  info?: string
 }
 
 export interface ComplementaryColors {
   /** @format color-input */
-  "base-200"?: string;
+  "base-200"?: string
   /** @format color-input */
-  "base-300"?: string;
+  "base-300"?: string
   /** @format color-input */
-  "base-content"?: string;
+  "base-content"?: string
   /** @format color-input */
-  "primary-content"?: string;
+  "primary-content"?: string
   /** @format color-input */
-  "secondary-content"?: string;
+  "secondary-content"?: string
   /**
    * @title Accent Content
    * @format color-input */
-  "tertiary-content"?: string;
+  "tertiary-content"?: string
   /** @format color-input */
-  "neutral-content"?: string;
+  "neutral-content"?: string
   /** @format color-input */
-  "success-content"?: string;
+  "success-content"?: string
   /** @format color-input */
-  "warning-content"?: string;
+  "warning-content"?: string
   /** @format color-input */
-  "error-content"?: string;
+  "error-content"?: string
   /** @format color-input */
-  "info-content"?: string;
+  "info-content"?: string
 }
 
 export interface Button {
@@ -66,24 +66,24 @@ export interface Button {
    * @default 1px
    * @title Border width
    */
-  "--border-btn": "1px" | "2px" | "3px" | "4px" | "5px" | "6px" | "7px" | "8px";
+  "--border-btn": "1px" | "2px" | "3px" | "4px" | "5px" | "6px" | "7px" | "8px"
   /**
    * @default 0.2rem
    * @title Radius
    * @description Button and similar elements
    */
-  "--rounded-btn": "0" | "0.2rem" | "0.4rem" | "0.8rem" | "2rem";
+  "--rounded-btn": "0" | "0.2rem" | "0.4rem" | "0.8rem" | "2rem"
   /**
    * @default 0.95
    * @title Scale on click
    */
-  "--btn-focus-scale": "0.9" | "0.95" | "1" | "1.05" | "1.1";
+  "--btn-focus-scale": "0.9" | "0.95" | "1" | "1.05" | "1.1"
   /**
    * @default 0.25s
    * @title Animation
    * @description Duration when you click
    */
-  "--animation-btn": "0.1s" | "0.15s" | "0.2s" | "0.25s" | "0.3s" | "0.35s";
+  "--animation-btn": "0.1s" | "0.15s" | "0.2s" | "0.25s" | "0.3s" | "0.35s"
 }
 
 export interface Miscellaneous {
@@ -92,76 +92,70 @@ export interface Miscellaneous {
    * @title Rounded box
    * @description border radius rounded-box utility class, used in card and other large boxes
    */
-  "--rounded-box": string;
+  "--rounded-box": string
   /**
    * @default 1.9rem
    * @title Rounded badge
    * @description border radius rounded-badge utility class, used in badges and similar
    */
-  "--rounded-badge": string;
+  "--rounded-badge": string
   /**
    * @default 0.2s
    * @title Animation input
    * @description duration of animation for inputs like checkbox, toggle, radio, etc
    */
-  "--animation-input": string;
+  "--animation-input": string
   /**
    * @default 1px
    * @title Tab border
    * @description border width of tabs
    */
-  "--tab-border": string;
+  "--tab-border": string
   /**
    * @default 0.5rem
    * @title Tab radius
    * @description border radius of tabs
    */
-  "--tab-radius": string;
+  "--tab-radius": string
 }
 
 export interface Props {
   /**
    * @description Set the prefers-color-scheme media query. To support dark mode, create two instances of this block and set this option to light/dark in each instance
    */
-  colorScheme: "any" | "light" | "dark";
-  mainColors?: ThemeColors;
+  colorScheme: "any" | "light" | "dark"
+  mainColors?: ThemeColors
   /** @description These will be auto-generated to a readable color if not set */
-  complementaryColors?: ComplementaryColors;
-  buttonStyle?: Button;
-  otherStyles?: Miscellaneous;
-  font?: Font;
+  complementaryColors?: ComplementaryColors
+  buttonStyle?: Button
+  otherStyles?: Miscellaneous
+  font?: Font
   /**
    * @description This is the admin's color-scheme mode
    */
-  mode?: "light" | "dark";
+  mode?: "light" | "dark"
 }
 
-type Theme =
-  & ThemeColors
-  & ComplementaryColors
-  & Button
-  & Miscellaneous;
+type Theme = ThemeColors & ComplementaryColors & Button & Miscellaneous
 
 const darken = (color: string, percentage: number) =>
-  new Color(color).darken(percentage);
+  new Color(color).darken(percentage)
 
 const isDark = (c: Color) =>
-  c.contrast("black", "WCAG21") < c.contrast("white", "WCAG21");
+  c.contrast("black", "WCAG21") < c.contrast("white", "WCAG21")
 
 const contrasted = (color: string, percentage = 0.8) => {
-  const c = new Color(color);
+  const c = new Color(color)
 
-  return isDark(c) ? c.mix("white", percentage) : c.mix("black", percentage);
-};
+  return isDark(c) ? c.mix("white", percentage) : c.mix("black", percentage)
+}
 
-const toVariables = (
-  t: Theme & Required<ThemeColors>,
-): [string, string][] => {
+const toVariables = (t: Theme & Required<ThemeColors>): [string, string][] => {
   const toValue = (color: string | ReturnType<typeof darken>) => {
-    const [l, c, h] = new Color(color).oklch;
+    const [l, c, h] = new Color(color).oklch
 
-    return `${(l * 100).toFixed(0)}% ${c.toFixed(2)} ${(h || 0).toFixed(0)}deg`;
-  };
+    return `${(l * 100).toFixed(0)}% ${c.toFixed(2)} ${(h || 0).toFixed(0)}deg`
+  }
 
   const colorVariables = Object.entries({
     "--p": t["primary"],
@@ -192,7 +186,7 @@ const toVariables = (
 
     "--in": t["info"],
     "--inc": t["info-content"] ?? contrasted(t["info"]),
-  }).map(([key, color]) => [key, toValue(color)] as [string, string]);
+  }).map(([key, color]) => [key, toValue(color)] as [string, string])
 
   const miscellaneousVariables = Object.entries({
     "--rounded-box": t["--rounded-box"],
@@ -204,21 +198,21 @@ const toVariables = (
     "--border-btn": t["--border-btn"],
     "--tab-border": t["--tab-border"],
     "--tab-radius": t["--tab-radius"],
-  });
+  })
 
-  return [...colorVariables, ...miscellaneousVariables];
-};
+  return [...colorVariables, ...miscellaneousVariables]
+}
 
 const defaultTheme = {
-  "primary": "oklch(1 0 0)",
-  "secondary": "oklch(1 0 0)",
-  "tertiary": "oklch(1 0 0)",
-  "neutral": "oklch(1 0 0)",
+  primary: "oklch(1 0 0)",
+  secondary: "oklch(1 0 0)",
+  tertiary: "oklch(1 0 0)",
+  neutral: "oklch(1 0 0)",
   "base-100": "oklch(1 0 0)",
-  "info": "oklch(1 0 0)",
-  "success": "oklch(0.9054 0.1546 194.7689)",
-  "warning": "oklch(1 0 0)",
-  "error": "oklch(1 0 0)",
+  info: "oklch(1 0 0)",
+  success: "oklch(0.9054 0.1546 194.7689)",
+  warning: "oklch(1 0 0)",
+  error: "oklch(1 0 0)",
 
   "--rounded-box": "1rem", // border radius rounded-box utility class, used in card and other large boxes
   "--rounded-btn": "0.2rem" as const, // border radius rounded-btn utility class, used in buttons and similar element
@@ -229,7 +223,7 @@ const defaultTheme = {
   "--border-btn": "1px" as const, // border width of buttons
   "--tab-border": "1px", // border width of tabs
   "--tab-radius": "0.5rem", // border radius of tabs
-};
+}
 
 /**
  * This section merges the DESIGN_SYTEM variable with incoming props into a css sheet with variables, i.e.
@@ -254,17 +248,16 @@ function Section({
     ...mainColors,
     ...buttonStyle,
     ...otherStyles,
-  };
+  }
 
   const variables = [
     ...toVariables(theme),
     [
       "--font-family",
       font?.family ||
-      "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
+        "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
     ],
-  ]
-    .map(([name, value]) => ({ name, value }));
+  ].map(([name, value]) => ({ name, value }))
 
   return (
     <SiteTheme
@@ -272,19 +265,17 @@ function Section({
       variables={variables}
       colorScheme={colorScheme === "any" ? undefined : colorScheme}
     />
-  );
+  )
 }
 
 export function Preview(props: Props) {
-  const adminColorMode = props.mode === "dark" ? "dark" : "light";
+  const adminColorMode = props.mode === "dark" ? "dark" : "light"
   return (
     <>
-      {
-        /* This stylesheet is used to simulate the colors from the admin's color schema (admin's light or dark mode), which are not accessible in the site's color schema.
-        * This is a temporary solution until the admin's color schema is accessible.
-        * TODO(@carol): Change this temporary solution / discuss with designers a doable approach
-       */
-      }
+      {/* This stylesheet is used to simulate the colors from the admin's color schema (admin's light or dark mode), which are not accessible in the site's color schema.
+       * This is a temporary solution until the admin's color schema is accessible.
+       * TODO(@carol): Change this temporary solution / discuss with designers a doable approach
+       */}
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;700&display=swap');
@@ -370,9 +361,7 @@ export function Preview(props: Props) {
       <div
         className={`flex flex-col gap-2 p-1 text-base w-full ${adminColorMode}`}
       >
-        <div className="admin-font-family">
-          Components and styles
-        </div>
+        <div className="admin-font-family">Components and styles</div>
         <div className="flex flex-col w-full gap-2">
           <PreviewContainer
             title="Text colors"
@@ -405,12 +394,10 @@ export function Preview(props: Props) {
         </div>
       </div>
       {props.font?.family && (
-        <div className="text-center py-2">
-          Font: {props.font.family}
-        </div>
+        <div className="text-center py-2">Font: {props.font.family}</div>
       )}
     </>
-  );
+  )
 }
 
 const ButtonSizesPreview = () => {
@@ -419,9 +406,9 @@ const ButtonSizesPreview = () => {
     md: "Normal",
     sm: "Small",
     xs: "Tiny",
-  };
+  }
 
-  const buttonStyles = ["", "primary", "secondary", "accent"];
+  const buttonStyles = ["", "primary", "secondary", "accent"]
 
   const renderButtonRow = (style: string) => (
     <div className="flex flex-row gap-2 items-center">
@@ -435,23 +422,23 @@ const ButtonSizesPreview = () => {
         </button>
       ))}
     </div>
-  );
+  )
 
   return (
     <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-col p-2 gap-2">
       {buttonStyles.map((style) => renderButtonRow(style))}
     </div>
-  );
-};
+  )
+}
 
 const ButtonColorsPreview = () => {
-  const buttonTypesClasses = ["btn", "btn-outline", "btn-ghost", "btn-link"];
+  const buttonTypesClasses = ["btn", "btn-outline", "btn-ghost", "btn-link"]
   const buttonColorsClasses = [
     { class: "", label: "Button" },
     { class: "btn-primary", label: "Primary" },
     { class: "btn-secondary", label: "Secondary" },
     { class: "btn-accent", label: "Accent" },
-  ];
+  ]
 
   const renderButtonRow = (type: string) => (
     <div className="flex flex-row gap-2">
@@ -465,14 +452,14 @@ const ButtonColorsPreview = () => {
         </button>
       ))}
     </div>
-  );
+  )
 
   return (
     <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-col p-2 gap-2">
       {buttonTypesClasses.map((type) => renderButtonRow(type))}
     </div>
-  );
-};
+  )
+}
 
 const ButtonStylesPreview = () => {
   const buttons = [
@@ -480,7 +467,7 @@ const ButtonStylesPreview = () => {
     { class: "btn-outline", label: "Outline" },
     { class: "btn-ghost text-[initial]", label: "Ghost" },
     { class: "btn-link", label: "Link" },
-  ];
+  ]
 
   return (
     <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-row p-2 gap-2">
@@ -490,8 +477,8 @@ const ButtonStylesPreview = () => {
         </button>
       ))}
     </div>
-  );
-};
+  )
+}
 
 const TextColorsPreview = () => {
   const textColorsClasses = [
@@ -499,7 +486,7 @@ const TextColorsPreview = () => {
     "text-primary",
     "text-secondary",
     "text-accent",
-  ];
+  ]
 
   return (
     <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-row p-2 gap-2 text-sm md:text-base">
@@ -509,25 +496,26 @@ const TextColorsPreview = () => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-const PreviewContainer = (
-  { mode, title, children, codeString }: {
-    mode: string;
-    title: string;
-    children: ComponentChildren;
-    codeString: string;
-  },
-) => {
-  const borderClass = mode === "dark"
-    ? "border-color-dark"
-    : "border-color-light";
-  const btnOutlineClass = mode === "dark"
-    ? "btn-outline-dark"
-    : "btn-outline-light";
-  const checkboxId = `show-code-${title.replace(/\s+/g, "-").toLowerCase()}`;
-  const codeBlockId = `code-block-${title.replace(/\s+/g, "-").toLowerCase()}`;
+const PreviewContainer = ({
+  mode,
+  title,
+  children,
+  codeString,
+}: {
+  mode: string
+  title: string
+  children: ComponentChildren
+  codeString: string
+}) => {
+  const borderClass =
+    mode === "dark" ? "border-color-dark" : "border-color-light"
+  const btnOutlineClass =
+    mode === "dark" ? "btn-outline-dark" : "btn-outline-light"
+  const checkboxId = `show-code-${title.replace(/\s+/g, "-").toLowerCase()}`
+  const codeBlockId = `code-block-${title.replace(/\s+/g, "-").toLowerCase()}`
 
   // Dynamic styles added to hide/show labels based on the checkbox state
   const dynamicStyle = `
@@ -545,17 +533,17 @@ const PreviewContainer = (
     }
     #${checkboxId}:checked ~ .hide-label {
       background-color: ${
-    mode === "dark"
-      ? "var(--admin-hover-bg-color)"
-      : "var(--admin-text-color-light)"
-  };
+        mode === "dark"
+          ? "var(--admin-hover-bg-color)"
+          : "var(--admin-text-color-light)"
+      };
       color: ${
-    mode === "dark"
-      ? "var(--admin-text-color-light)"
-      : "var(--admin-hover-bg-color)"
-  };
+        mode === "dark"
+          ? "var(--admin-text-color-light)"
+          : "var(--admin-hover-bg-color)"
+      };
     }
-  `;
+  `
 
   return (
     <>
@@ -594,8 +582,8 @@ const PreviewContainer = (
         {children}
       </div>
     </>
-  );
-};
+  )
+}
 
 // TODO(@carol): find a way to make these snippets more dynamic
 const snippets = {
@@ -657,6 +645,6 @@ const snippets = {
   <button class="btn btn-md btn-accent">Normal</button>
   <button class="btn btn-sm btn-accent">Small</button>
   <button class="btn btn-xs btn-accent">Tiny</button>`,
-};
+}
 
-export default Section;
+export default Section

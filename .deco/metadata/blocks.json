@@ -44,5 +44,31 @@
   "/.deco/blocks/deco-htmx.json": {
     "blockType": "apps",
     "__resolveType": "site/apps/deco/htmx.ts"
+  },
+  "/.deco/blocks/Preview%20htmx%2Fsections%2Fhtmx.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "htmx/sections/htmx.tsx"
+  },
+  "/.deco/blocks/Preview%20%2Fsections%2FPeer.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Peer.tsx"
+  },
+  "/.deco/blocks/pages-peer-926544.json": {
+    "name": "peer",
+    "path": "/receive",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/Preview%20%2Fsections%2FWaves.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Waves.tsx"
+  },
+  "/.deco/blocks/Preview%20%2Fsections%2FNewSection.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/NewSection.tsx"
+  },
+  "/.deco/blocks/Preview%20%2Fsections%2FMessageBox.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/MessageBox.tsx"
   }
 }
