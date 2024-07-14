@@ -3,6 +3,10 @@
   "path": "/",
   "sections": [
     {
+      "__resolveType": "site/sections/starstuff/StarBG.tsx",
+      "numberOfStars": 10
+    },
+    {
       "__resolveType": "site/sections/ItWorks.tsx",
       "name": "<p>It Works!</p>",
       "count": 1
