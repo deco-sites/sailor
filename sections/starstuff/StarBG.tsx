@@ -7,7 +7,6 @@ const onLoad = (numberOfStars: number) => {
   }
 
   function addStarComponent() {
-    // to do: stars appear at different intervals independently of each other
     let outerDiv = document.createElement("div")
     let innerDiv1 = document.createElement("div")
     innerDiv1.className = "sparkle1"
@@ -22,122 +21,101 @@ const onLoad = (numberOfStars: number) => {
     else {
       console.log("section doesnt exist")
     }
+
+    const starIndex = document.getElementsByClassName("sparkle1").length - 1
+    randomizeLocation(starIndex)
+    randomizeSize(starIndex)
+    restartAnimation(starIndex)
+    loopAnimation(starIndex)
   }
 
   function addStars(numofstars: number) {
     for (let i = 0; i < numofstars; i++) {
-      addStarComponent()
+      let delay = getRandomInt(3)
+      setTimeout(() => {
+        addStarComponent()
+      }, delay * 1000)
     }
   }
-
-  addStars(numberOfStars)
 
   function getRandomInt(max: number) {
     return Math.floor(Math.random() * max)
   }
 
-  function randomizeSize(array: HTMLCollectionOf<Element>) {
-    const sparkleEl = Array.from(array as HTMLCollectionOf<HTMLElement>)
-
-    for (let i = 0; i < array.length; i++) {
-      let randomNumber = getRandomInt(3)
-      if (randomNumber == 0) {
-        sparkleEl[i].style.width = 12 + "px"
-        sparkleEl[i].style.height = 14 + "px"
-      } else if (randomNumber == 1) {
-      } else {
-        sparkleEl[i].style.width = 7 + "px"
-        sparkleEl[i].style.height = 9 + "px"
-      }
+  function randomizeSize(i: number) {
+    const sparkleEl = document.getElementsByClassName("sparkle1")[
+      i
+    ] as HTMLElement
+    let randomNumber = getRandomInt(3)
+    if (randomNumber == 0) {
+      sparkleEl.style.width = 12 + "px"
+      sparkleEl.style.height = 14 + "px"
+    } else if (randomNumber == 1) {
+      sparkleEl.style.width = 10 + "px"
+      sparkleEl.style.height = 12 + "px"
+    } else {
+      sparkleEl.style.width = 7 + "px"
+      sparkleEl.style.height = 9 + "px"
     }
   }
 
   function randomizeLocation(i: number) {
-    //console.log("I got here 3");
     const var1 = Math.round(Math.random() * (globalThis.innerWidth - 5)) + "px"
     const var2 =
       Math.round(Math.random() * (globalThis.innerHeight * 0.6 - 5)) + "px"
 
-    const sparkleEl = Array.from(
-      document.getElementsByClassName(
-        "sparkle1"
-      ) as HTMLCollectionOf<HTMLElement>
-    )
-    const blurEl = Array.from(
-      document.getElementsByClassName("blur1") as HTMLCollectionOf<HTMLElement>
-    )
+    const sparkleEl = document.getElementsByClassName("sparkle1")[
+      i
+    ] as HTMLElement
+    const blurEl = document.getElementsByClassName("blur1")[i] as HTMLElement
 
     if (sparkleEl && blurEl) {
-      sparkleEl[i].style.right = var1
-      blurEl[i].style.right = var1
+      sparkleEl.style.right = var1
+      blurEl.style.right = var1
 
-      sparkleEl[i].style.top = var2
-      blurEl[i].style.top = var2
+      sparkleEl.style.top = var2
+      blurEl.style.top = var2
     } else {
       console.log("Elements not generated")
     }
   }
 
-  function finishAnimation() {
-    const animated = document.getElementsByClassName("sparkle1")
-
-    if (animated[0]) {
-      for (let i = 0; i < animated.length; i++) {
-        animated[i].addEventListener("animationend", () => {
-          randomizeSize(animated)
-          randomizeLocation(i)
-          restartAnimation(i)
-        })
-      }
-    } else {
-      console.log("ITS BROKEN")
-    }
-  }
-
-  function loopFunction(delay: number, func: () => void) {
-    const loop = function () {
-      func()
-      setTimeout(loop, delay)
-    }
-    loop()
-  }
-
   function restartAnimation(i: number) {
-    const el = Array.from(
-      document.getElementsByClassName(
-        "sparkle1"
-      ) as HTMLCollectionOf<HTMLElement>
-    )
-    const el2 = Array.from(
-      document.getElementsByClassName("blur1") as HTMLCollectionOf<HTMLElement>
-    )
+    const sparkleEl = document.getElementsByClassName("sparkle1")[
+      i
+    ] as HTMLElement
+    const blurEl = document.getElementsByClassName("blur1")[i] as HTMLElement
 
-    if (el && el2) {
-      el[i].style.animation = "none"
-      el2[i].style.animation = "none"
+    if (sparkleEl && blurEl) {
+      sparkleEl.style.animation = "none"
+      blurEl.style.animation = "none"
 
-      el[i].offsetHeight /* trigger reflow */
-      el2[i].offsetHeight /* trigger reflow */
+      sparkleEl.offsetHeight /* trigger reflow */
+      blurEl.offsetHeight /* trigger reflow */
 
-      el[i].style.animation = ""
-      el2[i].style.animation = ""
+      sparkleEl.style.animation = ""
+      blurEl.style.animation = ""
     } else {
       console.log("Element doesn't exist yet")
     }
   }
 
-  globalThis.onload = (_event) => {
-    const animated = document.getElementsByClassName("sparkle1")
-
-    for (let i = 0; i < animated.length; i++) {
-      randomizeLocation(i)
+  function loopAnimation(i: number) {
+    const sparkleEl = document.getElementsByClassName("sparkle1")[
+      i
+    ] as HTMLElement
+    if (sparkleEl) {
+      sparkleEl.addEventListener("animationend", () => {
+        randomizeSize(i)
+        randomizeLocation(i)
+        restartAnimation(i)
+        loopAnimation(i) // Continue the loop for this star
+      })
     }
+  }
 
-    finishAnimation()
-
-    loopFunction(10000, function () {
-      finishAnimation()
-    })
+  globalThis.onload = (_event) => {
+    addStars(numberOfStars)
   }
 }
 
