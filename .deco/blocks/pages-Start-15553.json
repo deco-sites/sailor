@@ -7,9 +7,7 @@
       "numberOfStars": 10
     },
     {
-      "__resolveType": "site/sections/ItWorks.tsx",
-      "name": "<p>It Works!</p>",
-      "count": 1
+      "__resolveType": "site/sections/ChatApp.tsx"
     },
     {
       "__resolveType": "site/sections/Waves.tsx"
