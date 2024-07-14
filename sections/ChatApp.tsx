@@ -9,7 +9,7 @@ const onLoad = () => {
     document.getElementById("link")?.addEventListener("click", () => {
       const currUrl = document.getElementById("currentUrl")
       const roomId = document.getElementById("roomId")?.innerHTML
-      navigator.clipboard.writeText(`${currUrl?.innerHTML}/receive#${roomId}`)
+      navigator.clipboard.writeText(`${currUrl?.innerHTML}${roomId}`)
     })
   })
 
