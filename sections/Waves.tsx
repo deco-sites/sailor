@@ -35,7 +35,7 @@ const onLoad = () => {
 
   const getPathAtPos = (path: SVGPathElement, pos: number) => {
     const totalLength = path.getTotalLength()
-    const waveLength = totalLength * 0.2
+    const waveLength = totalLength * 0.22
     const point = path.getPointAtLength((waveLength * pos) / w)
     return point
   }
@@ -47,11 +47,11 @@ const onLoad = () => {
     let a: number
     if (w > 1030) {
       const rem = (w - 1032) / 2
-      linpx = rem + 200
+      linpx = rem + 128
       a = h / 300
     } else {
       a = h / 700
-      linpx = 200
+      linpx = 128
     }
 
     if (!shouldCalculatePeer) {
@@ -92,7 +92,7 @@ const onLoad = () => {
     const pox = window.location.hash ? linpx : newPos
     const point = getPathAtPos(wave, pox)
 
-    peerDeph = point.y * a
+    peerDeph = point.y * a - 80
     if (shouldPeerSink) return
     boatPeer.style.top = `${peerDeph}px`
 
@@ -106,7 +106,7 @@ const onLoad = () => {
     const point = getPathAtPos(wave, rinpx)
     boat.style.left = `${rinpx}px`
 
-    boat.style.top = `${point.y * a}px`
+    boat.style.top = `${point.y * a - 80}px`
     requestAnimationFrame(animateBoat)
   }
 
@@ -143,9 +143,9 @@ const onLoad = () => {
 
     if (w > 1030) {
       const rem = (w - 1032) / 2
-      max = rem + 200
+      max = rem + 128
     } else {
-      max = 200
+      max = 128
     }
 
     if (Number(boatPeer.style.left.slice(0, -2)) >= max) {
