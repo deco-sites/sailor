@@ -1,7 +1,7 @@
 import { useScript } from "deco/hooks/useScript.ts"
 import { Chat } from "site/components/Chat.tsx"
 import MessageBox from "site/sections/MessageBox.tsx"
-
+//mesage
 const onLoad = () => {
   globalThis.addEventListener("DOMContentLoaded", () => {
     document.getElementById("create")?.click()
