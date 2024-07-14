@@ -1,13 +1,6 @@
 import { useScript } from "deco/hooks/useScript.ts"
 import { Boat } from "site/components/Boat.tsx"
 
-interface Props {
-  /**
-   * @description The description of name.
-   */
-  name?: string
-}
-
 const onLoad = () => {
   const w = globalThis.innerWidth
   const blobSvg = document.getElementById("blobSvg") as SVGElement | null
@@ -15,6 +8,8 @@ const onLoad = () => {
   const boatPeer = document.getElementById("boatPeer")
   const wave = document.getElementById("wave") as SVGPathElement | null
   let shouldCalculatePeer = !!window.location.hash
+  let shouldPeerSink = false
+  let peerDeph = 0
   let newPos = -100
 
   const getPathAtPos = (path: SVGPathElement, pos: number) => {
@@ -74,7 +69,11 @@ const onLoad = () => {
     const [linpx, a] = calculatePeerBoat()
 
     if (!linpx) return
-    const point = getPathAtPos(wave, newPos)
+    const point = getPathAtPos(wave, window.location.hash ? linpx : newPos)
+
+    peerDeph = point.y * a
+
+    if (shouldPeerSink) return
     boatPeer.style.top = `${point.y * a}px`
 
     requestAnimationFrame(animateBoatPeer)
@@ -86,8 +85,8 @@ const onLoad = () => {
     const [rinpx, a] = calculateBoat()
     const point = getPathAtPos(wave, rinpx)
     boat.style.left = `${rinpx}px`
-    boat.style.top = `${point.y * a}px`
 
+    boat.style.top = `${point.y * a}px`
     requestAnimationFrame(animateBoat)
   }
 
@@ -137,6 +136,28 @@ const onLoad = () => {
     requestAnimationFrame(animatePeerEnter)
   }
 
+  let peerTilt = 0
+
+  const animatePeerSink = () => {
+    if (!boatPeer) return
+    peerTilt += 0.6
+
+    if (peerTilt < 62) {
+      boatPeer.style.transform = `rotate(${-peerTilt}deg)`
+      requestAnimationFrame(animatePeerSink)
+      return
+    }
+
+    peerDeph += 1
+    if (peerDeph > 420) {
+      boatPeer.hidden = true
+      return
+    }
+
+    boatPeer.style.top = peerDeph + "px"
+    requestAnimationFrame(animatePeerSink)
+  }
+
   globalThis.addEventListener("htmx:wsAfterMessage", (data: any) => {
     let message
     try {
@@ -145,10 +166,10 @@ const onLoad = () => {
       console.debug(e)
     }
 
+    console.log("message", message)
     if (!message) return
 
     if (message.type === "peerConnected") {
-      globalThis.alert("peerConn")
       // trigger the boat animation
       requestAnimationFrame(animateBoatPeer)
       // animate boat untill it reaches the correct pos
@@ -157,12 +178,14 @@ const onLoad = () => {
 
     if (message.type === "ownerDisconnected") {
       console.log("ownerDisconnected")
-      // sink owner
+      shouldPeerSink = true
+      requestAnimationFrame(animatePeerSink)
     }
 
     if (message.type === "peerDisconnected") {
       console.log("peerDisconnected")
-      // sink peer
+      shouldPeerSink = true
+      requestAnimationFrame(animatePeerSink)
     }
   })
 }
